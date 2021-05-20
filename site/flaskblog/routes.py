@@ -1,5 +1,6 @@
 from flask import render_template, url_for, flash, request, jsonify, make_response
 from flask import session,redirect,render_template_string #Usado no login (o render_template_string é só usado na resposta)
+import json, requests
 from flaskblog import app, db
 from flaskblog.models import Site, Hotel, Promo 
 import uuid
@@ -9,7 +10,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html')
+    req = requests.get('http://localhost:5000/api/site')
+    data = json.loads(req.content)
+    return render_template('home.html', data=data)
 
 #SITE REST API
 @app.route('/api/site', methods=['GET'])
