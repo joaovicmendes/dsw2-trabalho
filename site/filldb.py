@@ -1,10 +1,10 @@
 from flaskblog import db
-from flaskblog.models import Site, Hotel #, Promo
+from flaskblog.models import Site, Hotel, Promo
 import os
 
 os.system('rm flaskblog/promos.db')
-
 db.create_all()
+
 site1 = Site(nome    = "Site1",
             endereco = "www.site1.com",
             senha    = "senhasite1",
@@ -26,9 +26,13 @@ db.session.add(site2)
 
 db.session.add(hotel)
 
-#promo1 = Promo(preco = 150.99)
-#db.session.add(promo1)
-#site1.promo = promo1
-#hotel.promo = promo1
+promo1 = Promo(preco = 150.99, site_end=site1.endereco, hotel_cnpj=hotel.cnpj)
+db.session.add(promo1)
+
+promo2 = Promo(preco = 180.50, site_end=site2.endereco, hotel_cnpj=hotel.cnpj)
+db.session.add(promo2)
+
+promo3 = Promo(preco = 50.51, site_end=site1.endereco, hotel_cnpj=hotel.cnpj)
+db.session.add(promo3)
 
 db.session.commit()

@@ -4,12 +4,11 @@ from datetime import datetime
 #Database do Usuário
 class Site(db.Model):
     id        = db.Column(db.Integer, primary_key = True)
-    #public_id = db.Column(db.String(50), unique = True)
     nome      = db.Column(db.String(30), nullable = False, unique = True)
     endereco  = db.Column(db.String(50), nullable = False, unique = True)
     senha     = db.Column(db.String(20), nullable = False)
     telefone  = db.Column(db.String(13), nullable = False, unique = True)
-    #promo     = db.relationship('Promo', backref='site', lazy = 'select',uselist=False)
+    promos     = db.relationship('Promo', backref='site')
 
     def __repr__(self):
         return f"{self.nome} - {self.endereco}"
@@ -20,11 +19,11 @@ class Hotel(db.Model):
     cnpj    = db.Column(db.String(14), nullable = False, unique = True)
     senha   = db.Column(db.String(20), nullable = False)
     cidade  = db.Column(db.String(30), nullable = False)
-    #promo   = db.relationship('Promo', backref='hotel', lazy = 'select',uselist=False)
+    promos   = db.relationship('Promo', backref='hotel')
 
     def __repr__(self):
         return f"{self.nome} - {self.cnpj}"
-'''
+
 class Promo(db.Model):
     id         = db.Column(db.Integer, primary_key = True)
     site_end   = db.Column(db.String(50), db.ForeignKey('site.endereco'))
@@ -35,4 +34,3 @@ class Promo(db.Model):
 
     def __repr__(self):
         return f"{self.site_end}, {self.hotel_cnpj}: {self.preco}"
-'''

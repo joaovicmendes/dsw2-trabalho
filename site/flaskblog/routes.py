@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, request, jsonify, make_response
 from flask import session,redirect,render_template_string #Usado no login (o render_template_string é só usado na resposta)
 from flaskblog import app, db
-from flaskblog.models import Site, Hotel #, Promo 
+from flaskblog.models import Site, Hotel, Promo 
 import uuid
 from werkzeug.security import generate_password_hash, check_password_hash
 
