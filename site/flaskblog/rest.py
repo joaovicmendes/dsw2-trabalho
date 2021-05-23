@@ -1,11 +1,11 @@
-from flask import request, jsonify, session
 import json, requests
+from flask import request, jsonify, session
+from werkzeug.security import generate_password_hash, check_password_hash
 from flaskblog import app, db
 from flaskblog.models import Site, Hotel, Promo 
-from werkzeug.security import generate_password_hash, check_password_hash
+from .utils import *
 
-
-#SITE REST API
+# API de Sites
 @app.route('/api/site', methods=['GET'])
 def get_all_sites():
     sites = Site.query.all()
@@ -50,10 +50,15 @@ def create_site():
     return jsonify({'message' : 'New site included.'})
 
 @app.route('/api/site/<id>', methods=['DELETE'])
-def delete_site(id):
+@token_required
+def delete_site(current_user, id):
+    id = int(id)
+    if get_user_role(current_user) != 'site' or current_user.id != id:
+        return unauthorized_access()
+
     site = Site.query.filter_by(id=id).first()
     promos = Promo.query.filter_by(site_end=site.endereco).all()
-    if not site:    
+    if not site:
         return jsonify({'message':'No site found. :('})
     db.session.delete(site)
     db.session.commit()
@@ -62,9 +67,7 @@ def delete_site(id):
         db.session.commit()
     return jsonify({'message':"The site and all of his promos have been deleted"})
 
-
-
-#HOTEL REST API
+# API de Hoteis
 @app.route('/api/hotel', methods=['GET'])
 def get_all_hotels():
     hoteis = Hotel.query.all()
@@ -82,10 +85,11 @@ def get_all_hotels():
 
 @app.route('/api/hotel/<id>', methods=['GET'])
 def get_one_hotel(id):
+    id = int(id)
     hotel = Hotel.query.filter_by(id=id).first()
 
     if not hotel:    
-        return jsonify({'message':'No hotel found. :('})
+        return jsonify({'message':'No hotel found. :('}), 401
 
     hotel_data = {}
     hotel_data['id'] = hotel.id
@@ -106,10 +110,16 @@ def create_hotel():
                     cidade=data['cidade'])
     db.session.add(new_hotel)
     db.session.commit()
-    return jsonify({'message' : 'New hotel included.'})
+    return jsonify({'message' : 'New hotel included.'}), 201
 
 @app.route('/api/hotel/<id>', methods=['DELETE'])
-def delete_hotel(id):
+@token_required
+def delete_hotel(current_user, id):
+    id = int(id)
+    if get_user_role(current_user) != 'hotel' or \
+     current_user.id != id:
+        return unauthorized_access()
+
     hotel = Hotel.query.filter_by(id=id).first()
     promos = Promo.query.filter_by(hotel_cnpj=hotel.cnpj).all()
     if not hotel:    
@@ -121,9 +131,7 @@ def delete_hotel(id):
         db.session.commit()
     return jsonify({'message':"The hotel has been deleted"})
 
-
-
-
+# API de Promoções
 @app.route('/api/promocao', methods=['GET'])
 def get_all_promos():
     promos = Promo.query.all()
@@ -145,6 +153,7 @@ def get_all_promos():
 
 @app.route('/api/promocao/<id>', methods=['GET'])
 def get_one_promo(id):
+    id = int(id)
     promo = Promo.query.filter_by(id=id).first()
 
     if not promo:    
@@ -159,18 +168,18 @@ def get_one_promo(id):
     promo_data['Fim'] = promo.end_promo
     return jsonify({'promo':promo_data})
 
-
 @app.route('/api/promocao', methods=['POST'])
-def create_promo():
+@token_required
+def create_promo(current_user):
     data = request.get_json()
     site = Site.query.filter_by(endereco=data['endereco']).first()
     if not site:
-        return jsonify({'message':'No site found. :('})
+        return jsonify({'message':'No site found. :('}), 404
     site_end = site.endereco
         
     hotel = Hotel.query.filter_by(cnpj=data['hotel_cnpj']).first()
     if not hotel:
-        return jsonify({'message':'No hotel found. :('})
+        return jsonify({'message':'No hotel found. :('}), 404
     hotel_cnpj = hotel.cnpj
 
     new_promo = Promo(site_end= site_end,
@@ -178,13 +187,19 @@ def create_promo():
                     preco=data['preco'])
     db.session.add(new_promo)
     db.session.commit()
-    return jsonify({'message' : 'New promo included.'})
+    return jsonify({'message' : 'New promo included.'}), 201
 
 @app.route('/api/promocao/<id>', methods=['DELETE'])
-def delete_promo(id):
+@token_required
+def delete_promo(current_user, id):
     promo = Promo.query.filter_by(id=id).first()
     if not promo:    
-        return jsonify({'message':'No promo found. :('})
+        return jsonify({'message':'No promo found. :('}), 404
+
+    if (get_user_role(current_user) == 'hotel' and current_user.cnpj != promo.hotel_cnpj) or\
+       (get_user_role(current_user) == 'site' and current_user.endereco != promo.site_end):
+        return unauthorized_access()
+
     db.session.delete(promo)
     db.session.commit()
     return jsonify({'message':"The promo has been deleted"})

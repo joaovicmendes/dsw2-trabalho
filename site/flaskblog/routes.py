@@ -1,7 +1,9 @@
-from flask import render_template, url_for, flash, request, jsonify, make_response
-from flask import session,redirect,render_template_string #Usado no login (o render_template_string é só usado na resposta)
 import json, requests
+from flask import render_template, url_for, flash, request, jsonify, make_response
+from flask import session, redirect, render_template_string
 from flaskblog import app
+from .models import *
+from .utils import *
 
 BASE_URL = "http://localhost:5000/"
 
@@ -14,9 +16,6 @@ def home():
     #coisa pra krl pra fazer ainda em fml pprt
     return render_template('home.html', data=data)
 
-
-
-#tentando realizar o login
 app.secret_key = 'BAD_SECRET_KEY'
 
 #@TODO Formulário de cadastro
@@ -36,52 +35,40 @@ def set_email():
         </form>
         """
 
-#Verifica se está logado como algum usuário, caso não esteja pede que seja realizado o login
-@app.route('/is_logged')
-def is_logged():
-    return render_template_string("""
-            {% if session['token'] %}
-                <h1>Welcome, you are logged as {{ session['user_type'] }}!</h1>
-            {% else %}
-                <h1>Welcome! Please enter your email <a href="{{ url_for('set_email') }}">here.</a></h1>
-            {% endif %}
-        """)
-
-#realiza logout por limpar a sessão
+# realiza logout por limpar a sessão
 @app.route('/logout')
 def logout():
-    # Clear the email stored in the session object
     session.pop('token', default=False)
     session.pop('user_type', default=None)
-    return '<h1>Logout realizado!</h1>'
+    return jsonify({'message':'Logout realizado'}), 200
 
-#Rota de Login
-#Caso receba um post, efetua comparação com a database e realiza o login se possível
-#Caso receba um get, retorna o template de formulário para login
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        site = Site.query.filter_by(nome=request.form["login_name"]).first()
-        if not site:    
-            return jsonify({'message':'No site found. :('})
-            pass
+## Rotas de Login
+#  GET:  retorna o template de formulário para login
+#  POST: tentativa de login
+@app.route('/login', methods=['GET'])
+def login_get():
+    # @TODO preciso implementar 'Basic Auth' com JS do lado do cliente
+    pass
 
-        session['token'] = True
-        session['user_type'] = "site"
+@app.route('/login', methods=['POST'])
+def login_post():
+    auth = request.authorization
 
-        return redirect(url_for('is_logged'))
+    if not auth or not auth.username or not auth.password:
+        return make_response(
+            'Credenciais inválidas',
+            401,
+            {'WWW-Authenticate' : 'Basic realm="Precisa estar logado"'})
 
+    user = get_user_via_username(auth.username)
+    if not user:
+        return jsonify({'message':'Credenciais invalidas.'}), 404
 
-    return """
-        <form method="post">
-            <label for="email">Nome:</label>
-            <input  id="name" name="login_name" required />
-            <br>
-            <label for="email">Senha:</label>
-            <input  id="password" name="login_password" required />
-            <br>
-            <button type="submit">Submit</button>
-            
+    # Geração de token para validar requisições para a API
+    # @TODO: Precisa começar a salvar a senha hasheada no banco para fazer essa verificação
+    # if check_password_hash(user.senha, auth.password): 
+    if user.senha == auth.password:
+        token = generate_token(user)
+        return jsonify({'token': token})
 
-        </form>
-        """
+    return jsonify({'message':'Credenciais invalidas.'}), 404
