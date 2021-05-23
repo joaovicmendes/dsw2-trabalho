@@ -44,12 +44,11 @@ def logout():
 
 ## Rotas de Login
 #  GET:  retorna o template de formulário para login
-#  POST: tentativa de login
 @app.route('/login', methods=['GET'])
 def login_get():
-    # @TODO preciso implementar 'Basic Auth' com JS do lado do cliente
-    pass
+    return render_template('login.html')
 
+#  POST: tentativa de login
 @app.route('/login', methods=['POST'])
 def login_post():
     auth = request.authorization
@@ -69,6 +68,7 @@ def login_post():
     # if check_password_hash(user.senha, auth.password): 
     if user.senha == auth.password:
         token = generate_token(user)
-        return jsonify({'token': token})
+        session['token'] = token # para simular chamada rest via js
+        return jsonify({'token': token}), 200
 
     return jsonify({'message':'Credenciais invalidas.'}), 404
