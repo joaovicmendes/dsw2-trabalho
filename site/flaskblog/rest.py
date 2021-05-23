@@ -47,7 +47,7 @@ def create_site():
                     telefone=data['telefone'])
     db.session.add(new_site)
     db.session.commit()
-    return jsonify({'message' : 'New site included.'})
+    return jsonify({'message' : 'New site included.'}), 201
 
 @app.route('/api/site/<id>', methods=['DELETE'])
 @token_required

@@ -18,29 +18,56 @@ def home():
 
 app.secret_key = 'BAD_SECRET_KEY'
 
-#@TODO Formulário de cadastro
-## Já que tem o endpoint de POST de site, não mexi nisso pra n quebrar nada
-@app.route('/cadastro', methods=['GET', 'POST'])
-def set_email():
+## Rotas de Cadastro
+# Rota inicial, que redireciona para o arquivo específico desejado
+@app.route('/cadastrar', methods=['GET'])
+def signup():
+    return render_template('cadastro.html')
+
+@app.route('/cadastrar/site', methods=['GET', 'POST'])
+def signup_site():
+    # Não deve ser necessário quando tiver JS no front
     if request.method == 'POST':
-        # Save the form data to the session object
-        session['email'] = request.form['email_address']
-        return redirect(url_for('get_email'))
+        site = {}
+        site['nome']     = request.form['nome']
+        site['endereco'] = request.form['endereco']
+        site['senha']    = request.form['senha']
+        site['telefone'] = request.form['telefone']
+ 
+        req = requests.post(BASE_URL + 'api/site', json=site)
+        if req.status_code != 201:
+            return jsonify({'message': 'Não foi possível criar Site'}), 500
 
-    return """
-        <form method="post">
-            <label for="email">Enter your email address:</label>
-            <input type="email" id="email" name="email_address" required />
-            <button type="submit">Submit</button
-        </form>
-        """
+        return jsonify({'message': 'Site criado com sucesso'}), 201
 
-# realiza logout por limpar a sessão
+    return render_template('cadastro_site.html')
+
+@app.route('/cadastrar/hotel', methods=['GET', 'POST'])
+def signup_hotel():
+    # Não deve ser necessário quando tiver JS no front
+    if request.method == 'POST':
+        site = {}
+        site['nome']   = request.form['nome']
+        site['cnpj']   = request.form['cnpj']
+        site['senha']  = request.form['senha']
+        site['cidade'] = request.form['cidade']
+ 
+        req = requests.post(BASE_URL + 'api/hotel', json=site)
+        if req.status_code != 201:
+            return jsonify({'message': 'Não foi possível criar Hotel'}), 500
+
+        return jsonify({'message': 'Hotel criado com sucesso'}), 201
+
+    return render_template('cadastro_hotel.html')
+
+
+# Realiza logout por limpar a sessão
 @app.route('/logout')
 def logout():
-    session.pop('token', default=False)
+    session.pop('token', default=None)
     session.pop('user_type', default=None)
-    return jsonify({'message':'Logout realizado'}), 200
+    # return jsonify({'message':'Logout realizado'}), 200
+    return redirect(BASE_URL)
 
 ## Rotas de Login
 #  GET:  retorna o template de formulário para login
