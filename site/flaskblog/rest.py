@@ -188,7 +188,7 @@ def get_promo_by_hotel(cnpj):
         output.append(promo_data)
     return jsonify({'promos':output})
 
-@app.route('/api/promocao/hotel/<site>', methods=['GET'])
+@app.route('/api/promocao/site/<site>', methods=['GET'])
 def get_promo_by_site(site):
     
     promos = Promo.query.filter_by(site_end=site)

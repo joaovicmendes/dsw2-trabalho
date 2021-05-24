@@ -29,13 +29,14 @@ def home():
     #coisa pra krl pra fazer ainda em fml pprt
     
     #cria as informações para gerar a tabela
-    table_headers = data["promos"][0].keys()#as chaves no header da tabela
-    table_data = []#as informaçes para mostrar na tabela
+    table_headers = [] #as chaves no header da tabela
+    table_data = [] #as informaçes para mostrar na tabela
+    if data["promos"]:
+        table_headers = data["promos"][0].keys()
+        table_data = []
     for promo in data["promos"]:
         table_data.append(promo.values())
     
-    
-
     #caso não precise de tabela, só tirar o table_header e table_data que nem renderiza a tabela
     return render_template('home.html', data=context ,table_headers=table_headers,table_data=table_data)
 
