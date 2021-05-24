@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    
-<h1>Home</h1>
 <div>
-    Logado como {{ data.username }}
-    Token {{ data.token }}
+    {% if data.logado == True %}
+    Logado como: {{ data.username }}<br>
+    Token: {{ data.token }}<br>
+    {% endif %}
 </div>
 
 <div>
     {# Verifica se as variaveis necessárias para criar uma tabela existem e se existir inclui o template de tabela#}
-    {% if table_data is defined%}
+    {% if table_data is defined %}
         {% include 'table.html'  %}
-    {%endif%}
+    {% endif %}
 </div>
 {% endblock content %}

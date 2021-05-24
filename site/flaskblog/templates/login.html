@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login – Site de Promoções</title>
-    <script type="text/javascript" src="{{url_for('static', filename='script/login.js')}}"></script>
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block content %}
+<div>
     <form method="post" id="login-form">
         <label for="username">Nome de usuário (CNPJ ou URL):</label> <br>
         <input id="username" name="username" required /> <br>
@@ -14,5 +9,5 @@
         <input id="password" name="password" type="password" required /> <br>
         <button type="button" onClick="get_token()" id="login-submit-button">Submit</button>
     </form>
-</body>
-</html>
+</div>
+{% endblock content %}

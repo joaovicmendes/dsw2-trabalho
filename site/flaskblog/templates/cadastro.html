@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro – Site de Promoções</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
+<div>
     Que tipo de cadastro gostaria de realizar?
     <br>
     <a href="/cadastrar/hotel">Cadastrar novo Hotel</a>
     <br>
     <a href="/cadastrar/site">Cadastrar novo Site</a>
-</body>
-</html>
+</div>
+{% endblock content %}

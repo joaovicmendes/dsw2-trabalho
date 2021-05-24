@@ -80,3 +80,14 @@ def get_user_role(user):
 
 def unauthorized_access():
     return jsonify({'message': 'Acesso não autorizado.'}), 401
+
+def get_session_context(session):
+    context = {}
+    if session:
+        try:
+            context['username'] = session['username']
+            context['logado'] = session['logado']
+            context['token'] = session['temp_token']
+        except KeyError:
+            pass
+    return context

@@ -24,15 +24,7 @@ def home():
     for promo in data["promos"]:
         table_data.append(promo.values())
     
-    #aqui coloquei pra poder comparar os tokens da sessão
-    context = {}
-    if session:
-        try:
-            context['username'] = session['username']
-            context['logado'] = session['logado']
-            context['token'] = session['temp_token']
-        except KeyError:
-            pass
+    context = get_session_context(session)
 
     #caso não precise de tabela, só tirar o table_header e table_data que nem renderiza a tabela
     return render_template('home.html', data=context ,table_headers=table_headers,table_data=table_data)
@@ -41,7 +33,8 @@ def home():
 # Rota inicial, que redireciona para o arquivo específico desejado
 @app.route('/cadastrar', methods=['GET'])
 def signup():
-    return render_template('cadastro.html')
+    context = get_session_context(session)
+    return render_template('cadastro.html', data=context)
 
 @app.route('/cadastrar/site', methods=['GET', 'POST'])
 def signup_site():
@@ -59,7 +52,8 @@ def signup_site():
 
         return jsonify({'message': 'Site criado com sucesso'}), 201
 
-    return render_template('cadastro_site.html')
+    context = get_session_context(session)
+    return render_template('cadastro_site.html', data=context)
 
 @app.route('/cadastrar/hotel', methods=['GET', 'POST'])
 def signup_hotel():
@@ -77,7 +71,8 @@ def signup_hotel():
 
         return jsonify({'message': 'Hotel criado com sucesso'}), 201
 
-    return render_template('cadastro_hotel.html')
+    context = get_session_context(session)
+    return render_template('cadastro_hotel.html', data=context)
 
 
 # Realiza logout por limpar a sessão
@@ -112,9 +107,11 @@ def login():
                     return 'Login bem sucedido, usuário ' + username
 
         # @TODO colocar mensagem de erro no template
-        return render_template('login.html')
-
-    return render_template('login.html')
+        context = get_session_context(session)
+        return render_template('login.html', data=context)
+        
+    context = get_session_context(session)
+    return render_template('login.html', data=context)
 
 
 @app.route('/api/token', methods=['POST'])
