@@ -5,6 +5,15 @@ from flaskblog import app, db
 from flaskblog.models import Site, Hotel, Promo 
 from .utils import *
 
+@app.route('/api/user', methods=['GET'])
+@token_required
+def get_current_user(current_user, id):
+    if get_user_role(current_user) == 'site':
+        user = site_to_dict(current_user)
+    elif get_user_role(current_user) == 'hotel':
+        user = hotel_to_dict(current_user)
+    return jsonify(user)
+
 # API de Sites
 @app.route('/api/site', methods=['GET'])
 def get_all_sites():
@@ -135,9 +144,8 @@ def delete_hotel(current_user, id):
 @app.route('/api/promocao', methods=['GET'])
 def get_all_promos():
     promos = Promo.query.all()
-
     if not promos:    
-        return jsonify({'message':'No hotel found. :('})
+        return jsonify({'message':'Nenhuma promoção encontrada'})
 
     output = []
     for promo in promos:

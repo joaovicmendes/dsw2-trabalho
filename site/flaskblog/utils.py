@@ -92,3 +92,21 @@ def get_session_context(session):
         except KeyError:
             pass
     return context
+
+def site_to_dict(site):
+    site_dict = {}
+    site_dict['id'] = site.id
+    site_dict['nome'] = site.nome
+    site_dict['endereco'] = site.endereco
+    # site_dict['senha'] = site.senha
+    site_dict['telefone'] = site.telefone
+    return site_dict
+
+def hotel_to_dict(hotel):
+    hotel_dict = {}
+    hotel_dict['id'] = hotel.id
+    hotel_dict['nome'] = hotel.nome
+    hotel_dict['cnpj'] = hotel.cnpj
+    # hotel_dict['senha'] = hotel.senha
+    hotel_dict['cidade'] = hotel.cidade
+    return hotel_dict

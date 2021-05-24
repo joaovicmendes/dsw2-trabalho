@@ -1,3 +1,6 @@
+<head>
+    <script type="text/javascript" src="{{url_for('static', filename='script/home.js')}}"></script>
+</head>
 {% extends "layout.html" %}
 
 {% block content %}
@@ -8,7 +11,14 @@
     {% endif %}
 </div>
 
+<div id="main-content">
+    Tabela Frontend
+    <table id="main-table-content">
+    </table>
+</div>
+
 <div>
+    Tabela Backend
     {# Verifica se as variaveis necessárias para criar uma tabela existem e se existir inclui o template de tabela#}
     {% if table_data is defined %}
         {% include 'table.html'  %}
