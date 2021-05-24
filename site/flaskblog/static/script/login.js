@@ -1,21 +1,18 @@
-function send_login_info() {
+function get_token() {
     let headers = new Headers();
     const username = document.querySelector('#username').value;
     const password = document.querySelector('#password').value;
     headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
 
-    fetch(window.location.href, { method: 'POST', headers: headers})
+    fetch('http://'+window.location.hostname+':5000/api/token', { method: 'POST', headers: headers})
     .then(function(response) {
         console.log(response);
         if (response.status != 200) {
-            response.json().then(data => {alert(data.message);});
-            window.location.reload();
+            response.json().then( data => {alert(data.message);} );
         } else {
             response.json().then(data => {
-                window.localStorage.setItem('token', data.token);
-                window.location.href = "http://127.0.0.1:5000/"});
-                // @TODO: precisa ver como fazer js fazer o request sem dar trigger no botão, com a solução atual
-                // clicando no botão funciona certo, mas a tecla enter não faz nada.
+                window.localStorage.setItem('token', data.token); })
+                document.getElementById('login-form').submit()
         }
     })
     .catch(function(err) {

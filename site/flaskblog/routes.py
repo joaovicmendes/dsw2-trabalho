@@ -25,14 +25,16 @@ def home():
         table_data.append(promo.values())
     
     #aqui coloquei pra poder comparar os tokens da sessão
-    token = ""
+    context = {}
     if session:
-        token = session["token"]
+        try:
+            context['username'] = session['username']
+            context['logado'] = session['logado']
+        except KeyError:
+            pass
 
     #caso não precise de tabela, só tirar o table_header e table_data que nem renderiza a tabela
-    return render_template('home.html', data=token ,table_headers=table_headers,table_data=table_data)
-
-
+    return render_template('home.html', data=context ,table_headers=table_headers,table_data=table_data)
 
 ## Rotas de Cadastro
 # Rota inicial, que redireciona para o arquivo específico desejado
@@ -80,20 +82,40 @@ def signup_hotel():
 # Realiza logout por limpar a sessão
 @app.route('/logout')
 def logout():
-    session.pop('token', default=None)
-    session.pop('user_type', default=None)
+    session.pop('username', default=None)
+    session.pop('auth',    default=False)
     # return jsonify({'message':'Logout realizado'}), 200
-    return redirect(BASE_URL)
+    return '''
+            Deslogado com sucesso
+            <script>window.localStorage.removeItem('token');</script>
+        '''
 
 ## Rotas de Login
 #  GET:  retorna o template de formulário para login
-@app.route('/login', methods=['GET'])
-def login_get():
+#  POST: tentativa de login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        senha    = request.form['password']
+        if username and senha:
+            user = get_user_via_username(username)
+            if user:
+                # @TODO: Precisa começar a salvar a senha hasheada no banco para fazer essa verificação
+                # if check_password_hash(user.senha, auth.password): 
+                if user.senha == senha:
+                    session['username'] = username
+                    session['logado']   = True
+                    return 'Login bem sucedido, usuário ' + username
+
+        # @TODO colocar mensagem de erro no template
+        return render_template('login.html')
+
     return render_template('login.html')
 
-#  POST: tentativa de login
-@app.route('/login', methods=['POST'])
-def login_post():
+
+@app.route('/api/token', methods=['POST'])
+def get_token():
     auth = request.authorization
 
     if not auth or not auth.username or not auth.password:
@@ -111,7 +133,6 @@ def login_post():
     # if check_password_hash(user.senha, auth.password): 
     if user.senha == auth.password:
         token = generate_token(user)
-        session['token'] = token # para simular chamada rest via js
         return jsonify({'token': token}), 200
 
     return jsonify({'message':'Credenciais invalidas.'}), 404
