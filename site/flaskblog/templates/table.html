@@ -1,0 +1,21 @@
+
+
+{% block content %}
+<div>
+    <h2>Tabela</h2>
+    <table>
+        <tr>
+            {% for header in table_headers %}
+            <th>{{header }}</th>
+            {%endfor%}
+        </tr>
+        {% for row in table_data %}
+        <tr>
+            {%for cell in row%}
+                <td>{{cell}}</td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+    </table>
+</div>
+{% endblock content %}

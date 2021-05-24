@@ -1,8 +1,16 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h1>Home</h1>
-    <div>
-        {{ data }}
-    </div>
+    
+<h1>Home</h1>
+<div>
+    {{ data }}
+</div>
+
+<div>
+    {# Verifica se as variaveis necessárias para criar uma tabela existem e se existir inclui o template de tabela#}
+    {% if table_data is defined%}
+        {% include 'table.html'  %}
+    {%endif%}
+</div>
 {% endblock content %}

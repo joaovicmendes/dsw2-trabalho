@@ -147,7 +147,7 @@ def get_all_promos():
         promo_data['cnpj'] = promo.hotel_cnpj
         promo_data['preco'] = promo.preco
         promo_data['inicio'] = promo.ini_promo
-        promo_data['Fim'] = promo.end_promo
+        promo_data['fim'] = promo.end_promo
         output.append(promo_data)
     return jsonify({'promos':output})
 

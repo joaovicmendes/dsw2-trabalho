@@ -10,13 +10,29 @@ BASE_URL = "http://localhost:5000/"
 @app.route("/")
 @app.route("/home")
 def home():
-    req = requests.get(BASE_URL + 'api/site')
+    req = requests.get(BASE_URL + 'api/promocao')
+    #print("---------------------------------\n\n\n")
+    #print(req.content)
+    #print("---------------------------------\n\n\n")
     data = json.loads(req.content)
     #aqui tem que usar o json pra montar as tabelas e tal
     #coisa pra krl pra fazer ainda em fml pprt
-    return render_template('home.html', data=data)
+    
+    #cria as informações para gerar a tabela
+    table_headers = data["promos"][0].keys()#as chaves no header da tabela
+    table_data = []#as informaçes para mostrar na tabela
+    for promo in data["promos"]:
+        table_data.append(promo.values())
+    
+    #aqui coloquei pra poder comparar os tokens da sessão
+    token = ""
+    if session:
+        token = session["token"]
 
-app.secret_key = 'BAD_SECRET_KEY'
+    #caso não precise de tabela, só tirar o table_header e table_data que nem renderiza a tabela
+    return render_template('home.html', data=token ,table_headers=table_headers,table_data=table_data)
+
+
 
 ## Rotas de Cadastro
 # Rota inicial, que redireciona para o arquivo específico desejado
