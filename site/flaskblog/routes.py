@@ -30,6 +30,7 @@ def home():
         try:
             context['username'] = session['username']
             context['logado'] = session['logado']
+            context['token'] = session['temp_token']
         except KeyError:
             pass
 
@@ -83,7 +84,8 @@ def signup_hotel():
 @app.route('/logout')
 def logout():
     session.pop('username', default=None)
-    session.pop('auth',    default=False)
+    session.pop('auth', default=False)
+    session.pop('temp_token', default=None)
     # return jsonify({'message':'Logout realizado'}), 200
     return '''
             Deslogado com sucesso
@@ -106,6 +108,7 @@ def login():
                 if user.senha == senha:
                     session['username'] = username
                     session['logado']   = True
+                    session['temp_token'] = generate_token(user)
                     return 'Login bem sucedido, usuário ' + username
 
         # @TODO colocar mensagem de erro no template
