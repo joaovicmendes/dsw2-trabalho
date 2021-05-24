@@ -88,6 +88,7 @@ def get_session_context(session):
             context['username'] = session['username']
             context['logado'] = session['logado']
             context['token'] = session['temp_token']
+            context['role'] = session['role']
         except KeyError:
             pass
     return context

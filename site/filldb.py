@@ -1,5 +1,6 @@
 from flaskblog import db
 from flaskblog.models import Site, Hotel, Promo
+from werkzeug.security import generate_password_hash
 import os
 
 os.system('rm flaskblog/banco.db')
@@ -7,58 +8,58 @@ db.create_all()
 
 site1 = Site(nome    = "Ofertão",
             endereco = "www.ofertao.com.br",
-            senha    = "senhasite1",
+            senha    = generate_password_hash("senhasite1",method='sha256'),
             telefone = "5516912345678")
 
 site2 = Site(nome    = "Desconto Legal",
             endereco = "www.descontolegal.com",
-            senha    = "senhasite2",
+            senha    = generate_password_hash("senhasite2",method='sha256'),
             telefone = "5511961382167")
 
 site3 = Site(nome    = "Central do Preço",
             endereco = "www.centraldopreco.com",
-            senha    = "senhasite2",
+            senha    = generate_password_hash("senhasite2",method='sha256'),
             telefone = "5511964052079")
 
 site4 = Site(nome    = "Preço Baixo",
             endereco = "www.precobaixo.com.br",
-            senha    = "senhasite3",
+            senha    = generate_password_hash("senhasite3",method='sha256'),
             telefone = "5519933427065")
 
 site5 = Site(nome    = "Cupom Store",
             endereco = "www.cupomstore.com",
-            senha    = "senhasite4",
+            senha    = generate_password_hash("senhasite4",method='sha256'),
             telefone = "5517954076430")
 
 
 hotel1 = Hotel(nome = "Lakeview Hotel",
             cnpj    = "62278848997305",
-            senha   = "senhahotel1",
+            senha    = generate_password_hash("senhahotel1",method='sha256'),
             cidade  = "São Paulo")
 
 hotel2 = Hotel(nome = "Oceanview Motel",
             cnpj    = "74154433501666",
-            senha   = "senhahotel2",
+            senha    = generate_password_hash("senhahotel2",method='sha256'),
             cidade  = "São Paulo")
 
 hotel3 = Hotel(nome = "The Great Northern Hotel",
             cnpj    = "33373145729006",
-            senha   = "senhahotel3",
+            senha    = generate_password_hash("senhahotel1=3",method='sha256'),
             cidade  = "São Paulo")
 
 hotel4 = Hotel(nome = "Giant's Deep Hotel",
             cnpj    = "33146749007486",
-            senha   = "senhahotel4",
+            senha    = generate_password_hash("senhahotel4",method='sha256'),
             cidade  = "Blumenau")
 
 hotel5 = Hotel(nome = "Brittle Hollow Hotel",
             cnpj    = "48057327771821",
-            senha   = "senhahotel4",
+            senha    = generate_password_hash("senhahotel4",method='sha256'),
             cidade  = "Blumenau")
 
 hotel6 = Hotel(nome = "Timber Hearth Hotel",
             cnpj    = "94743633222202",
-            senha   = "senhahotel5",
+            senha    = generate_password_hash("senhahotel5",method='sha256'),
             cidade  = "Salvador")
 
             

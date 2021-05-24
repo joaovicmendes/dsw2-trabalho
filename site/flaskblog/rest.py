@@ -1,6 +1,6 @@
 import json, requests
 from flask import request, jsonify, session
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
 from flaskblog import app, db
 from flaskblog.models import Site, Hotel, Promo 
 from .utils import *
@@ -167,6 +167,46 @@ def get_one_promo(id):
     promo_data['inicio'] = promo.ini_promo
     promo_data['Fim'] = promo.end_promo
     return jsonify({'promo':promo_data})
+
+@app.route('/api/promocao/hotel/<cnpj>', methods=['GET'])
+def get_promo_by_hotel(cnpj):
+    cnpj = int(cnpj)
+    promos = Promo.query.filter_by(hotel_cnpj=cnpj)
+
+    if not promos:    
+        return jsonify({'message':'No hotel found. :('})
+
+    output = []
+    for promo in promos:
+        promo_data = {}
+        promo_data['id'] = promo.id
+        promo_data['site'] = promo.site_end
+        promo_data['cnpj'] = promo.hotel_cnpj
+        promo_data['preco'] = promo.preco
+        promo_data['inicio'] = promo.ini_promo
+        promo_data['fim'] = promo.end_promo
+        output.append(promo_data)
+    return jsonify({'promos':output})
+
+@app.route('/api/promocao/hotel/<site>', methods=['GET'])
+def get_promo_by_site(site):
+    
+    promos = Promo.query.filter_by(site_end=site)
+
+    if not promos:    
+        return jsonify({'message':'No hotel found. :('})
+
+    output = []
+    for promo in promos:
+        promo_data = {}
+        promo_data['id'] = promo.id
+        promo_data['site'] = promo.site_end
+        promo_data['cnpj'] = promo.hotel_cnpj
+        promo_data['preco'] = promo.preco
+        promo_data['inicio'] = promo.ini_promo
+        promo_data['fim'] = promo.end_promo
+        output.append(promo_data)
+    return jsonify({'promos':output})
 
 @app.route('/api/promocao', methods=['POST'])
 @token_required

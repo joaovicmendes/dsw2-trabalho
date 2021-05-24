@@ -1,6 +1,7 @@
 import json, requests
 from flask import render_template, url_for, flash, request, jsonify, make_response
 from flask import session, redirect, render_template_string
+from werkzeug.security import  check_password_hash
 from flaskblog import app
 from .models import *
 from .utils import *
@@ -10,7 +11,16 @@ BASE_URL = "http://localhost:5000/"
 @app.route("/")
 @app.route("/home")
 def home():
-    req = requests.get(BASE_URL + 'api/promocao')
+    context = get_session_context(session)
+    
+    if "role" in context:
+        print("AAAAA")
+        if context["role"] == 'hotel':
+            req = requests.get(BASE_URL + 'api/promocao/hotel/' + context["username"])
+        if context["role"] == "site":
+            req = requests.get(BASE_URL + 'api/promocao/site/' + context["username"])
+    else:
+        req = requests.get(BASE_URL + 'api/promocao')
     #print("---------------------------------\n\n\n")
     #print(req.content)
     #print("---------------------------------\n\n\n")
@@ -24,7 +34,7 @@ def home():
     for promo in data["promos"]:
         table_data.append(promo.values())
     
-    context = get_session_context(session)
+    
 
     #caso não precise de tabela, só tirar o table_header e table_data que nem renderiza a tabela
     return render_template('home.html', data=context ,table_headers=table_headers,table_data=table_data)
@@ -85,6 +95,7 @@ def logout():
     return '''
             Deslogado com sucesso
             <script>window.localStorage.removeItem('token');</script>
+            <a href="/">Inicio</a>
         '''
 
 ## Rotas de Login
@@ -99,11 +110,12 @@ def login():
             user = get_user_via_username(username)
             if user:
                 # @TODO: Precisa começar a salvar a senha hasheada no banco para fazer essa verificação
-                # if check_password_hash(user.senha, auth.password): 
-                if user.senha == senha:
+                if check_password_hash(user.senha, senha): 
+                #if user.senha == senha:
                     session['username'] = username
                     session['logado']   = True
                     session['temp_token'] = generate_token(user)
+                    session['role'] = get_user_role(user)
                     return 'Login bem sucedido, usuário ' + username
 
         # @TODO colocar mensagem de erro no template
@@ -130,8 +142,8 @@ def get_token():
 
     # Geração de token para validar requisições para a API
     # @TODO: Precisa começar a salvar a senha hasheada no banco para fazer essa verificação
-    # if check_password_hash(user.senha, auth.password): 
-    if user.senha == auth.password:
+    if check_password_hash(user.senha, auth.password): 
+    #if user.senha == auth.password:
         token = generate_token(user)
         return jsonify({'token': token}), 200
 
