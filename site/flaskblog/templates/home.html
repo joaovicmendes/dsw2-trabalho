@@ -1,19 +1,20 @@
-<head>
-    <script type="text/javascript" src="{{url_for('static', filename='script/home.js')}}"></script>
-</head>
 {% extends "layout.html" %}
 
 {% block content %}
+<!-- {% if data.logado %}
+<div class="main" style="align-content: center;">
+    <br>
+    <button type="submit" onClick="get_all('hotel')">Hotéis</button>
+    <button type="button" onClick="get_all('site')">Sites  </button>
+    <br>
+</div>
+{% endif %}
 
-<!--
-
-    <div id="main-content">
-        Tabela Frontend
-        <table id="main-table-content">
-        </table>
-    </div>
-        Tabela Backend
--->
+<div class="main">
+    <h2 id="table-title" style="align-content: center;">Promoções</h2>
+    <table id="table-content">
+    </table>
+</div> -->
 
 <div class="main">
     {# Verifica se as variaveis necessárias para criar uma tabela existem e se existir inclui o template de tabela#}
@@ -21,4 +22,5 @@
         {% include 'table.html'  %}
     {% endif %}
 </div>
+<script>get_all('promocao')</script>
 {% endblock content %}
