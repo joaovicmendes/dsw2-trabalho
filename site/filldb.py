@@ -1,6 +1,7 @@
 from flaskblog import db
 from flaskblog.models import Site, Hotel, Promo
 from werkzeug.security import generate_password_hash
+import datetime
 import os
 
 os.system('rm flaskblog/banco.db')
@@ -75,8 +76,7 @@ db.session.add(hotel4)
 db.session.add(hotel5)
 db.session.add(hotel6)
 
-
-promo1  = Promo(preco = 100.19, site_end=site1.endereco, hotel_cnpj=hotel1.cnpj)
+promo1  = Promo(preco = 100.19, site_end=site1.endereco, hotel_cnpj=hotel1.cnpj,ini_promo=datetime.datetime(2021,5,10),end_promo=datetime.datetime(2021,6,12))
 promo2  = Promo(preco = 110.29, site_end=site2.endereco, hotel_cnpj=hotel1.cnpj)
 promo3  = Promo(preco = 200.39, site_end=site3.endereco, hotel_cnpj=hotel2.cnpj)
 promo4  = Promo(preco = 220.49, site_end=site4.endereco, hotel_cnpj=hotel2.cnpj)

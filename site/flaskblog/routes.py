@@ -20,26 +20,14 @@ def home():
             req = requests.get(BASE_URL + 'api/promocao/site/' + context["username"])
     else:
         req = requests.get(BASE_URL + 'api/promocao')
-    #print("---------------------------------\n\n\n")
-    #print(req.content)
-    #print("---------------------------------\n\n\n")
+
     data = json.loads(req.content)
-    #aqui tem que usar o json pra montar as tabelas e tal
-    #coisa pra krl pra fazer ainda em fml pprt
-    
+
     #cria as informações para gerar a tabela
-    table_headers = [] #as chaves no header da tabela
-    table_data = [] #as informaçes para mostrar na tabela
-    for d in data['promos']:
-        _ = d.pop('id')
-    if data["promos"]:
-        table_headers = data["promos"][0].keys()
-        table_data = []
-    for promo in data["promos"]:
-        table_data.append(promo.values())
+    headers, rows = filter_table(data['promos'],'promo', ['id'])
     
     #caso não precise de tabela, só tirar o table_header e table_data que nem renderiza a tabela
-    return render_template('home.html', data=context,table_headers=table_headers,table_data=table_data,table_name='Promoções')
+    return render_template('home.html', data=context, headers=headers, table_data=rows, name='Promoções')
 
 ## Rotas de Cadastro
 # Rota inicial, que redireciona para o arquivo específico desejado
@@ -99,19 +87,10 @@ def list_sites():
     
     req = requests.get(BASE_URL + 'api/site')
     data = json.loads(req.content)
-    for d in data['sites']:
-        _ = d.pop('senha')
-        _ = d.pop('id')
-    #cria as informações para gerar a tabela
-    table_headers = list() #as chaves no header da tabela
-    table_data = list() #as informaçes para mostrar na tabela
-    if data["sites"]:
-        table_headers = list(data["sites"][0].keys())
-    for promo in data["sites"]:
-        table_data.append(promo.values())
+    headers, rows = filter_table(data['sites'],'site',['senha','id'])
     
     #caso não precise de tabela, só tirar o table_header e table_data que nem renderiza a tabela
-    return render_template('home.html', title= "Otelo - Sites", data=context ,table_headers=table_headers, table_data=table_data, table_name='Sites')
+    return render_template('home.html', title="Otelo - Sites", data=context ,headers=headers, table_data=rows, name='Sites')
 
 @app.route('/hoteis')
 def list_hotels():
@@ -124,19 +103,11 @@ def list_hotels():
     
     req = requests.get(BASE_URL + 'api/hotel')
     data = json.loads(req.content)
-    for d in data['hoteis']:
-        _ = d.pop('senha')
-        _ = d.pop('id')
-    #cria as informações para gerar a tabela
-    table_headers = list() #as chaves no header da tabela
-    table_data = list() #as informaçes para mostrar na tabela
-    if data["hoteis"]:
-        table_headers = list(data["hoteis"][0].keys())
-    for promo in data["hoteis"]:
-        table_data.append(promo.values())
+    headers, rows = filter_table(data['hoteis'],'hotel',['senha','id'])
+   
     
     #caso não precise de tabela, só tirar o table_header e table_data que nem renderiza a tabela
-    return render_template('home.html', title="Otelo - Hoteis", data=context ,table_headers=table_headers, table_data=table_data, table_name='Hoteis')
+    return render_template('home.html', title="Otelo - Hoteis", data=context ,headers=headers, table_data=rows, name='Hoteis')
 
 
 # Realiza logout por limpar a sessão

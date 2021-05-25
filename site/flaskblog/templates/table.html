@@ -1,9 +1,9 @@
 {% block content %}
 <div>
-    <h4 style="align-content: center;">{{ table_name }}</h2>
+    <h4 style="align-content: center;">{{ name }}</h2>
     <table>
         <tr>
-            {% for header in table_headers %}
+            {% for header in headers %}
             <th>{{ header }}</th>
             {%endfor%}
         </tr>
