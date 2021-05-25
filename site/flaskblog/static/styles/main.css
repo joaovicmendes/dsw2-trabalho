@@ -1,5 +1,6 @@
 body {
     font-family: Helvetica;
+    font-size: medium;
 }
   
 table, th, td {
@@ -93,8 +94,7 @@ th {
 }
 .main {
     margin-left: 220px; /* Same as the width of the sidenav */
-    
     margin-top: 75px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
     padding: 0px 10px;
+    text-decoration: none;
 }
