@@ -1,0 +1,100 @@
+body {
+    font-family: Helvetica;
+}
+  
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+tr:nth-child(even){background-color: #f2f2f2;}
+tr:hover {background-color: #ddd;}
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #32c9a8;
+    color: white;
+}
+
+
+.side_menu{
+    border-right-style: solid;
+    border-width: 1px;
+    border-color: #AAAAAA;
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f1f1f1;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.side_menu a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+}
+.side_menu li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.side_menu  a:hover {
+    background-color: #555;
+    color: white;
+}
+.side_menu ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.top_menu li {
+    display: block;
+    float: right;
+}
+.top_menu li:hover {
+    background-color: #222;
+    
+}
+.top_menu li a{
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+.top_menu li {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    
+}
+.top_menu ul{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+.main {
+    margin-left: 220px; /* Same as the width of the sidenav */
+    
+    margin-top: 75px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}

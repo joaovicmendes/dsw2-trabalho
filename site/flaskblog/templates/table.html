@@ -1,10 +1,10 @@
 {% block content %}
 <div>
-    <h2>Tabela</h2>
+    <h4 style="align-content: center;">{{ table_name }}</h2>
     <table>
         <tr>
             {% for header in table_headers %}
-            <th>{{header }}</th>
+            <th>{{ header }}</th>
             {%endfor%}
         </tr>
         {% for row in table_data %}
