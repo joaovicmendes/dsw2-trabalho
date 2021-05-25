@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="main">
+    <p>Login realizado com sucesso! (redirecionando em 5seg)</p>
+    <script>
+        setTimeout(() => {window.location.href = "/"}, 5000)
+    </script>
+</div>
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="main">
+    <p>Logout realizado com sucesso!</p>
+    <script>
+        window.localStorage.removeItem('token');
+        // setTimeout(resolve, ms)
+    </script>
+</div>
+{% endblock content %}

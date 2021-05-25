@@ -116,12 +116,8 @@ def logout():
     session.pop('username', default=None)
     session.pop('auth', default=False)
     session.pop('temp_token', default=None)
-    # return jsonify({'message':'Logout realizado'}), 200
-    return '''
-            Deslogado com sucesso
-            <script>window.localStorage.removeItem('token');</script>
-            <a href="/">Inicio</a>
-        '''
+    context = get_session_context(session)
+    return render_template('logout.html', title="Otelo - Login", data=context)
 
 ## Rotas de Login
 #  GET:  retorna o template de formulário para login
@@ -134,16 +130,13 @@ def login():
         if username and senha:
             user = get_user_via_username(username)
             if user:
-                # @TODO: Precisa começar a salvar a senha hasheada no banco para fazer essa verificação
                 if check_password_hash(user.senha, senha): 
-                #if user.senha == senha:
                     session['username'] = username
                     session['logado']   = True
                     session['temp_token'] = generate_token(user)
                     session['role'] = get_user_role(user)
-                    return 'Login bem sucedido, usuário ' + username
+                    return render_template('login_sucesso.html', title="Otelo - Login", data=get_session_context(session))
 
-        # @TODO colocar mensagem de erro no template
         context = get_session_context(session)
         return render_template('login.html', title="Otelo - Login", data=context)
         
@@ -166,9 +159,7 @@ def get_token():
         return jsonify({'message':'Credenciais invalidas.'}), 404
 
     # Geração de token para validar requisições para a API
-    # @TODO: Precisa começar a salvar a senha hasheada no banco para fazer essa verificação
     if check_password_hash(user.senha, auth.password): 
-    #if user.senha == auth.password:
         token = generate_token(user)
         return jsonify({'token': token}), 200
 
