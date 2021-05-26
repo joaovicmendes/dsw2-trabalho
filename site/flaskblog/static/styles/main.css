@@ -34,7 +34,7 @@ label {
     display: inline-block;
 }
   
-input[type=submit], button {
+input[type=submit], .register_button {
     background-color: #39b499;
     color: white;
     margin-top: 20px;
@@ -43,6 +43,7 @@ input[type=submit], button {
     border-radius: 4px;
     cursor: pointer;
     float: right;
+    text-decoration: none;
 }
   
 input[type=submit]:hover, button:hover {
