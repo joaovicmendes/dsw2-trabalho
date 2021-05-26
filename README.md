@@ -6,3 +6,8 @@ Trabalho da disciplina Desenvolvimento de Software para Web 2 (1001543) - UFSCar
 - [João Victor Mendes Freire](https://github.com/joaovicmendes), 758943
 - [Martin Heckmann](https://github.com/heckmartin), 758986
 - [Renan Dantas Pasquantonio](https://github.com/renandantasp), 760549
+
+## Instruções
+- Executar `pip install -r requirements.txt` para instalar as dependências
+- Executar `filldb.py` para popular o banco
+- Executar `python run.py` para rodar o site (`localhost:5000`)
