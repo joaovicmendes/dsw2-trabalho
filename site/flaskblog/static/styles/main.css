@@ -17,8 +17,62 @@ th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #32c9a8;
+    background-color: #39b499;
     color: white;
+}
+
+.input_text, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+  
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+  
+input[type=submit] {
+    background-color: #39b499;
+    color: white;
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+  
+input[type=submit]:hover {
+    background-color: #238671;
+}
+  
+.container {
+    margin-top: 15%;
+    margin-left: 25%;
+    width: 40%;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+  
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+  
+.col-75 {
+    float: left;
+    width: 40%;
+    margin-top: 6px;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 
@@ -36,7 +90,6 @@ th {
     overflow-x: hidden;
     padding-top: 20px;
 }
-
 .side_menu a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -50,7 +103,7 @@ th {
     padding: 8px 16px;
     text-decoration: none;
 }
-.side_menu  a:hover {
+.side_menu a:hover {
     background-color: #555;
     color: white;
 }
@@ -92,6 +145,7 @@ th {
     overflow: hidden;
     background-color: #333;
 }
+
 .main {
     margin-left: 220px; /* Same as the width of the sidenav */
     margin-top: 75px; /* Same as the width of the sidenav */

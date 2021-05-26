@@ -2,12 +2,21 @@
 
 {% block content %}
 <div class="main">
-    <form method="post" id="login-form">
-        <label for="username">Nome de usuário (CNPJ ou URL):</label> <br>
-        <input id="username" name="username" required /> <br>
-        <label for="password">Senha:</label> <br>
-        <input id="password" name="password" type="password" required /> <br>
-        <button type="button" onClick="get_token()" id="login-submit-button">Submit</button>
-    </form>
+    <div class="container"> 
+        <form method="post" id="login-form">
+        <h3>Login</h3>
+            <div class="row"> 
+                <label for="username" class="col-25">Nome de usuário</label>
+                <input id= "username" class="col-75 input_text" placeholder="CNPJ ou URL" name="username" required /> <br>
+            </div>    
+            <div class="row"> 
+                <label for="password" class="col-25"> Senha</label>
+                <input id= "password" class="col-75 input_text" name="password" type="password" required /> <br>
+            </div>    
+            <div class="row"> 
+                <input type="submit" onClick="get_token()" id="login-submit-button"></button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock content %}
