@@ -11,6 +11,7 @@ td, th {
     border: 1px solid #ddd;
     padding: 8px;
 }
+
 tr:nth-child(even){background-color: #f2f2f2;}
 tr:hover {background-color: #ddd;}
 th {
@@ -21,7 +22,7 @@ th {
     color: white;
 }
 
-.input_text, select, textarea {
+.input_text, select {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -41,7 +42,6 @@ input[type=submit], .register_button {
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
-    cursor: pointer;
     float: right;
     text-decoration: none;
 }
