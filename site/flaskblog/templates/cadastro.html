@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="main">
-    Que tipo de cadastro gostaria de realizar?
-    <br>
-    <a href="/cadastrar/hotel">Cadastrar novo Hotel</a>
-    <br>
-    <a href="/cadastrar/site">Cadastrar novo Site</a>
+    <h3>Que tipo de cadastro gostaria de realizar?</h3>
+    <div class="row" style="margin-left: 75px;">
+        <button style="float: left; margin-right: 10px;" href="/cadastrar/hotel">Novo Hotel</button>
+        <button style="float: left;" href="/cadastrar/site">Novo Site</button>
+    </div>
+
 </div>
 {% endblock content %}

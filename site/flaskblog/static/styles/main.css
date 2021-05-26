@@ -34,7 +34,7 @@ label {
     display: inline-block;
 }
   
-input[type=submit] {
+input[type=submit], button {
     background-color: #39b499;
     color: white;
     margin-top: 20px;
@@ -45,7 +45,7 @@ input[type=submit] {
     float: right;
 }
   
-input[type=submit]:hover {
+input[type=submit]:hover, button:hover {
     background-color: #238671;
 }
   
