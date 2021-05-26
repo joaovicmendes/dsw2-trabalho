@@ -7,12 +7,15 @@ from .utils import *
 
 @app.route('/api/user', methods=['GET'])
 @token_required
-def get_current_user(current_user, id):
-    if get_user_role(current_user) == 'site':
+def get_current_user(current_user):
+    role = get_user_role(current_user)
+    user = {}
+    if role == 'site':
         user = site_to_dict(current_user)
-    elif get_user_role(current_user) == 'hotel':
+    elif role == 'hotel':
         user = hotel_to_dict(current_user)
-    return jsonify(user)
+    user['role'] = role;
+    return jsonify(user), 200
 
 # API de Sites
 @app.route('/api/site', methods=['GET'])
@@ -219,15 +222,18 @@ def get_promo_by_site(site):
 @app.route('/api/promocao', methods=['POST'])
 @token_required
 def create_promo(current_user):
-    data = request.get_json()
-    site = Site.query.filter_by(endereco=data['endereco']).first()
+    data = request.get_json(force=True)
+    if not data or not data['nome_site'] or not data['nome_hotel'] or not data['preco']:
+        return jsonify({'message':'Campos não preenchidos.'}), 401
+
+    site = Site.query.filter_by(nome=data['nome_site']).first()
     if not site:
-        return jsonify({'message':'No site found. :('}), 404
+        return jsonify({'message':'Site não encontrado.'}), 404
     site_end = site.endereco
         
-    hotel = Hotel.query.filter_by(cnpj=data['hotel_cnpj']).first()
+    hotel = Hotel.query.filter_by(nome=data['nome_hotel']).first()
     if not hotel:
-        return jsonify({'message':'No hotel found. :('}), 404
+        return jsonify({'message':'Hotel não encontrado.'}), 404
     hotel_cnpj = hotel.cnpj
 
     new_promo = Promo(site_end= site_end,
@@ -235,7 +241,7 @@ def create_promo(current_user):
                     preco=data['preco'])
     db.session.add(new_promo)
     db.session.commit()
-    return jsonify({'message' : 'New promo included.'}), 201
+    return jsonify({'message' : 'Nova promoção adicionada!'}), 201
 
 @app.route('/api/promocao/<id>', methods=['DELETE'])
 @token_required

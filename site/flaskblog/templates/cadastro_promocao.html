@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="post" class="main">
+    {% if data.role == 'hotel' %}
+    <label for="nome_site">Site:</label>
+    <select id="nome_site" name="nome_site" required >
+        {% for site in sites %}
+        <option value="{{site.nome}}">{{ site.nome }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    {% endif %}
+    {% if data.role == 'site' %}
+    <label for="nome_hotel">Hotel:</label>
+    <select id="nome_hotel" name="nome_hotel" required >
+        {% for hotel in hoteis %}
+        <option value="{{hotel.nome}}">{{ hotel.nome }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    {% endif %}
+    <label for="preco">Preço (R$):</label>
+    <input id="preco" name="preco" required />
+    <br>
+    <label for="data-ini">Data início (opcional):</label>
+    <input id="data-ini" name="data-ini" />
+    <br>
+    <label for="data-fim">Data fim (opcional):</label>
+    <input id="data-fim" name="data-fim" />
+    <br>
+    <button type="button" onClick="create_promo()">Criar</button>
+</form>
+{% endblock content %}

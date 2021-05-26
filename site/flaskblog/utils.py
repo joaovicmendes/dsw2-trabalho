@@ -61,10 +61,9 @@ def token_required(f):
         
         try:
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-            print(data)
             user = get_user_via_username(data['usr'])
         except:
-            return jsonify({'message': 'Token inválido.'}), 400
+            return jsonify({'message': 'Token expirado. Faça login novamente.'}), 400
 
         return f(user, *args, **kwargs)
     return decorated

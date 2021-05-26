@@ -74,6 +74,21 @@ def signup_hotel():
     context = get_session_context(session)
     return render_template('cadastro_hotel.html', title="Cadastro de Hotel",  data=context)
 
+@app.route('/cadastrar/promocao', methods=['GET'])
+def create_promos():
+    raw_sites  = Site.query.all()
+    sites = []
+    for site in raw_sites:
+        sites.append(site)
+
+    raw_hoteis = Hotel.query.all()
+    hoteis = []
+    for hotel in raw_hoteis:
+        hoteis.append(hotel)
+
+    context = get_session_context(session)
+    return render_template('cadastro_promocao.html', title="Otelo - Cadastro",  data=context, hoteis=hoteis, sites=sites)
+
 ## Rotas de Listagem
 #Rota de listar sites
 @app.route('/sites')

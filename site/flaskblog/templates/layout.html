@@ -7,6 +7,7 @@
     {% else %}<title>Otelo</title>{% endif %}
     <script type="text/javascript" src="{{url_for('static', filename='script/login.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='script/home.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='script/cadastro.js')}}"></script>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
     <link rel="shortcut icon" href="static/Otelo.svg">
 </head>
@@ -30,7 +31,7 @@
             <li><a href="/sites">Sites</a></li>
             <li><a href="/hoteis">Hotéis</a></li>
             {% if data.logado %}
-            <li><a href="/#">Criar Promoção</a></li>
+            <li><a href="/cadastrar/promocao">Criar Promoção</a></li>
             {% endif %}
         </ul>
     </div>
