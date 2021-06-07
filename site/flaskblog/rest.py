@@ -236,9 +236,18 @@ def create_promo(current_user):
         return jsonify({'message':'Hotel não encontrado.'}), 404
     hotel_cnpj = hotel.cnpj
 
+    try:
+        ini = datetime.strptime(data['ini'], '%m/%d/%Y')
+        fim = datetime.strptime(data['fim'], '%m/%d/%Y')
+    except:
+        ini = datetime.now()
+        fim = datetime.now()
+
     new_promo = Promo(site_end= site_end,
                     hotel_cnpj= hotel_cnpj,
-                    preco=data['preco'])
+                    preco=data['preco'],
+                    ini_promo=ini,
+                    end_promo=fim)
     db.session.add(new_promo)
     db.session.commit()
     return jsonify({'message' : 'Nova promoção adicionada!'}), 201
