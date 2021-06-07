@@ -1,6 +1,12 @@
 function getAll(category) {
     // Incluindo token de acesso na requisição
     const token = window.localStorage.getItem('token');
+    if (token == null) {
+        alert("Token inexistente/expirado. Faça login novamente.");
+        window.location.href = "/logout";
+        return;
+    }
+    
     let headers = new Headers();
     headers.append('x-access-token', token);
     
