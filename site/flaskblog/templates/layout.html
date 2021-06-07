@@ -9,7 +9,7 @@
     <script type="text/javascript" src="{{url_for('static', filename='script/home.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='script/cadastro.js')}}"></script>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
-    <link rel="shortcut icon" href="static/Otelo.svg">
+    <link rel="shortcut icon" href="/static/Otelo.svg">
 </head>
 <body>
     <div class="top_menu">
@@ -28,8 +28,8 @@
         <ul>
             <br> 
             <li><a onclick="home()">Início</a></li>
-            <li><a onclick="getAll('site')">Sites</a></li>
-            <li><a onclick="getAll('hotel')">Hotéis</a></li>
+            <li><a onclick="sites()">Sites</a></li>
+            <li><a onclick="hoteis()">Hotéis</a></li>
             {% if data.logado %}
             <li><a href="/cadastrar/promocao">Criar Promoção</a></li>
             {% endif %}

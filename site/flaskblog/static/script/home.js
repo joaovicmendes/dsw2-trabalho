@@ -1,11 +1,31 @@
 function home() {
     // Atualiza a tabela com promoções
-    if (window.location.href == "http://localhost:5000/" || window.location.href == "http://127.0.0.1:5000/") {
+    if (onHome(window.location.href)) {
         getAll('promocao');
         return;
     }
     // Redireciona para a página principal
     window.location.href = "/";
+}
+
+function sites() {
+    // Atualiza a tabela com sites
+    if (onHome(window.location)) {
+        getAll('site');
+        return;
+    }
+    // Redireciona para a página principal
+    window.location.href = "/sites";
+}
+
+function hoteis() {
+    // Atualiza a tabela com hotéis
+    if (onHome(window.location)) {
+        getAll('hotel');
+        return;
+    }
+    // Redireciona para a página principal
+    window.location.href = "/hoteis";
 }
 
 function getAll(category) {
@@ -178,4 +198,12 @@ function filterPromocao(promos) {
             filtered.push(promo)
     }
     return filtered;
+}
+
+function onHome(url) {
+    return (
+        url == "http://localhost:5000/" || url == "http://127.0.0.1:5000/" ||
+        url == "http://localhost:5000/sites" || url == "http://127.0.0.1:5000/sites" ||
+        url == "http://localhost:5000/hoteis" || url == "http://127.0.0.1:5000/hoteis"      
+    );
 }
