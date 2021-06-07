@@ -27,17 +27,18 @@
         <img src="/static/Otelo.png" style="padding-left:20px;" width="150"> </li>
         <ul>
             <br> 
-            <li><a href="/">Início</a></li>
-            <li><a href="/sites">Sites</a></li>
-            <li><a href="/hoteis">Hotéis</a></li>
+            <li><a onclick="home()">Início</a></li>
+            <li><a onclick="getAll('site')">Sites</a></li>
+            <li><a onclick="getAll('hotel')">Hotéis</a></li>
             {% if data.logado %}
             <li><a href="/cadastrar/promocao">Criar Promoção</a></li>
             {% endif %}
         </ul>
     </div>
-    
+    <div class="main">
 {% block content %}
 {% endblock %}
+    </div>
 </body>
 </html>
 

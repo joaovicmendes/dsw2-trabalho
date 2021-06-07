@@ -176,6 +176,6 @@ def get_token():
     # Geração de token para validar requisições para a API
     if check_password_hash(user.senha, auth.password): 
         token = generate_token(user)
-        return jsonify({'token': token}), 200
+        return jsonify({'token': token, 'role': get_user_role(user), 'username': auth.username}), 200
 
     return jsonify({'message':'Credenciais invalidas.'}), 404

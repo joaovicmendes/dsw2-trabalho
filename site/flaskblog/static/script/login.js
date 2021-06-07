@@ -24,6 +24,8 @@ function getToken() {
                     response.json().then(
                         (data) => {
                             window.localStorage.setItem('token', data.token); 
+                            window.localStorage.setItem('role', data.role); 
+                            window.localStorage.setItem('username', data.username); 
                         })
                     document.getElementById('login-form').submit()
                 }

@@ -1,26 +1,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<!-- {% if data.logado %}
-<div class="main" style="align-content: center;">
-    <br>
-    <button type="submit" onClick="get_all('hotel')">Hotéis</button>
-    <button type="button" onClick="get_all('site')">Sites  </button>
-    <br>
-</div>
-{% endif %}
-
-<div class="main">
-    <h2 id="table-title" style="align-content: center;">Promoções</h2>
-    <table id="table-content">
-    </table>
-</div> -->
-
-<div class="main">
     {# Verifica se as variaveis necessárias para criar uma tabela existem e se existir inclui o template de tabela#}
     {% if table_data is defined %}
         {% include 'table.html'  %}
     {% endif %}
-</div>
-<script>getAll('promocao')</script>
 {% endblock content %}

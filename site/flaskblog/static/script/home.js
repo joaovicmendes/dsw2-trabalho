@@ -1,15 +1,19 @@
+function home() {
+    // Atualiza a tabela com promoções
+    if (window.location.href == "http://localhost:5000/" || window.location.href == "http://127.0.0.1:5000/") {
+        getAll('promocao');
+        return;
+    }
+    // Redireciona para a página principal
+    window.location.href = "/";
+}
+
 function getAll(category) {
     // Incluindo token de acesso na requisição
     const token = window.localStorage.getItem('token');
-    if (token == null) {
-        alert("Token inexistente/expirado. Faça login novamente.");
-        window.location.href = "/logout";
-        return;
-    }
-    
     let headers = new Headers();
     headers.append('x-access-token', token);
-    
+
     // Requisição para API
     fetch('http://' + window.location.hostname + ':5000/api/' + category, { 
             method: 'GET',
@@ -28,11 +32,11 @@ function getAll(category) {
                 response.json().then(
                     (data) => {
                         if (category == 'promocao') {
-                            updateTable(category, data.promos);
+                            updateTable(category, filterPromocao(Object.values(data.promos)));
                         } else if (category == 'hotel') {
-                            updateTable(category, data.hoteis);
+                            updateTable(category, Object.values(data.hoteis));
                         } else if (category == 'site') {
-                            updateTable(category, data.sites);
+                            updateTable(category, Object.values(data.sites));
                         }
                     });
             })
@@ -157,4 +161,21 @@ function hotel2table(data) {
         table += row;
 
     return table;
+}
+
+function filterPromocao(promos) {
+    const role     = window.localStorage.getItem('role');
+    const username = window.localStorage.getItem('username');
+    if (role == null || username == null) {
+        return promos;
+    }
+
+    let filtered = []
+    for (let promo of promos) {
+        if (role == 'hotel' && promo.cnpj == username)
+            filtered.push(promo)
+        else if (role == 'site' && promo.site == username)
+            filtered.push(promo)
+    }
+    return filtered;
 }

@@ -5,6 +5,8 @@
     <p>Logout realizado com sucesso!</p>
     <script>
         window.localStorage.removeItem('token');
+        window.localStorage.removeItem('role');
+        window.localStorage.removeItem('username');
     </script>
 </div>
 {% endblock content %}
