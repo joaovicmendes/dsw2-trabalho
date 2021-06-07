@@ -1,33 +1,42 @@
-function get_all(category) {
+function getAll(category) {
     // Incluindo token de acesso na requisição
-    let headers = new Headers();
     const token = window.localStorage.getItem('token');
+    let headers = new Headers();
     headers.append('x-access-token', token);
     
     // Requisição para API
-    fetch(('http://'+ window.location.hostname + ':5000/api/' + category), { method: 'GET', headers: headers})
-    .then(function(response) {
-        console.log(response);
-        if (response.status != 200) {
-            response.json().then( data => { alert(data.message); });
-        } else {
-            response.json().then( data => {
-                if (category == 'promocao')
-                    update_table(category, data.promos);
-                else if (category == 'hotel') {
-                    update_table(category, data.hoteis);
-                }
-                else if (category == 'site')
-                    update_table(category, data.sites);
+    fetch('http://' + window.location.hostname + ':5000/api/' + category, { 
+            method: 'GET',
+            headers: headers
+        })
+        .then(
+            (response) => {
+                if (response.status != 200) {
+                    response.json().then(
+                        (data) => { 
+                            alert(data.message); 
+                        });
+                    return;
+                } 
+                
+                response.json().then(
+                    (data) => {
+                        if (category == 'promocao') {
+                            updateTable(category, data.promos);
+                        } else if (category == 'hotel') {
+                            updateTable(category, data.hoteis);
+                        } else if (category == 'site') {
+                            updateTable(category, data.sites);
+                        }
+                    });
+            })
+        .catch(
+            (err) => {
+                console.log('Fetch Error: ', err);
             });
-        }
-    })
-    .catch(function(err) {
-      console.log('Fetch Error: ', err);
-    });
-};
+}
 
-function update_table(category, data) {
+function updateTable(category, data) {
     let title = document.getElementById('table-title');
     let table = document.getElementById('table-content');
     let html = '';
@@ -35,12 +44,10 @@ function update_table(category, data) {
     if (category == 'promocao') {
         title.innerText = "Promoções";
         html = promo2table(data);
-    }
-    else if (category == 'site') {
+    } else if (category == 'site') {
         title.innerText = "Sites";
         html = site2table(data);
-    }
-    else if (category == 'hotel') {
+    } else if (category == 'hotel') {
         title.innerText = "Hotéis";
         html = hotel2table(data);
     }
@@ -55,14 +62,14 @@ function promo2table(data) {
 
     // Preenchendo cabeçalho
     const headers = ['Site', 'CNPJ Hotel', 'Preço', 'Data início', 'Data fim'];
-    header += '<tr>'
-    for (item of headers) {
+    header += '<tr>';
+    for (let item of headers) {
         header += '<th>' + item + '</th>';
     }
-    header += '</tr>'
+    header += '</tr>';
 
     // Preenchendo colunas
-    for (item of data) {
+    for (let item of data) {
         let row = '';
         row += '<tr>';
         row += "<td>" + item.site   + "</td>";
@@ -76,7 +83,7 @@ function promo2table(data) {
 
     // Montando tabela
     table += header;
-    for (row of rows)
+    for (let row of rows)
         table += row;
 
     return table;
@@ -89,14 +96,14 @@ function site2table(data) {
 
     // Preenchendo cabeçalho
     const headers = ['Nome', 'Endereço (URL)', 'Telefone'];
-    header += '<tr>'
-    for (item of headers) {
+    header += '<tr>';
+    for (let item of headers) {
         header += '<th>' + item + '</th>';
     }
-    header += '</tr>'
+    header += '</tr>';
 
     // Preenchendo colunas
-    for (item of data) {
+    for (let item of data) {
         let row = '';
         row += '<tr>';
         row += "<td>" + item.nome   + "</td>";
@@ -108,7 +115,7 @@ function site2table(data) {
 
     // Montando tabela
     table += header;
-    for (row of rows)
+    for (let row of rows)
         table += row;
 
     return table;
@@ -121,14 +128,14 @@ function hotel2table(data) {
 
     // Preenchendo cabeçalho
     const headers = ['Nome', 'CNPJ', 'Cidade'];
-    header += '<tr>'
-    for (item of headers) {
+    header += '<tr>';
+    for (let item of headers) {
         header += '<th>' + item + '</th>';
     }
-    header += '</tr>'
+    header += '</tr>';
 
     // Preenchendo colunas
-    for (item of data) {
+    for (let item of data) {
         let row = '';
         row += '<tr>';
         row += "<td>" + item.nome    + "</td>";
@@ -140,7 +147,7 @@ function hotel2table(data) {
 
     // Montando tabela
     table += header;
-    for (row of rows)
+    for (let row of rows)
         table += row;
 
     return table;
