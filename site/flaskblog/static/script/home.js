@@ -91,7 +91,7 @@ function promo2table(data) {
     let rows   = [];
 
     // Preenchendo cabeçalho
-    const headers = ['Site', 'CNPJ Hotel', 'Preço', 'Data início', 'Data fim'];
+    const headers = ['Site', 'CNPJ Hotel', 'Nome Hotel', 'Cidade', 'Preço', 'Data início', 'Data fim'];
     header += '<tr>';
     for (let item of headers) {
         header += '<th>' + item + '</th>';
@@ -104,6 +104,8 @@ function promo2table(data) {
         row += '<tr>';
         row += "<td>" + item.site   + "</td>";
         row += "<td>" + item.cnpj   + "</td>";
+        row += "<td>" + item.hotel   + "</td>";
+        row += "<td>" + item.cidade   + "</td>";
         row += "<td>" + item.preco  + "</td>";
         row += "<td>" + item.inicio + "</td>";
         row += "<td>" + item.fim    + "</td>";
@@ -206,4 +208,42 @@ function onHome(url) {
         url == "http://localhost:5000/sites" || url == "http://127.0.0.1:5000/sites" ||
         url == "http://localhost:5000/hoteis" || url == "http://127.0.0.1:5000/hoteis"      
     );
+}
+
+function searchPromocao() {
+    const queryCity = document.getElementById('queryCity').value.toLowerCase();
+
+    // @TODO: da pra colocar essa requisição em uma nova função, mas tem que usar async/await
+    // Incluindo token de acesso na requisição
+    const token = window.localStorage.getItem('token');
+    let headers = new Headers();
+    headers.append('x-access-token', token);
+
+    // Requisição para API
+    fetch('http://' + window.location.hostname + ':5000/api/promocao', { 
+            method: 'GET',
+            headers: headers
+        })
+        .then(
+            (response) => {
+                if (response.status != 200) {
+                    response.json().then(
+                        (data) => { 
+                            alert(data.message); 
+                        });
+                    return;
+                } 
+                
+                response.json().then(
+                    (data) => {
+                        let promos = filterPromocao(Object.values(data.promos));
+                        let filtered = [];
+                        for (let promo of promos) {
+                            if (promo.cidade.toLowerCase().includes(queryCity)) {
+                                filtered.push(promo);
+                            }
+                        }
+                        updateTable('promocao', filtered);
+                    });
+            });
 }

@@ -152,10 +152,13 @@ def get_all_promos():
 
     output = []
     for promo in promos:
+        hotel = Hotel.query.filter_by(cnpj=promo.hotel_cnpj).first()
         promo_data = {}
         promo_data['id'] = promo.id
         promo_data['site'] = promo.site_end
         promo_data['cnpj'] = promo.hotel_cnpj
+        promo_data['hotel'] = hotel.nome
+        promo_data['cidade'] = hotel.cidade
         promo_data['preco'] = promo.preco
         promo_data['inicio'] = promo.ini_promo
         promo_data['fim'] = promo.end_promo
@@ -170,10 +173,14 @@ def get_one_promo(id):
     if not promo:    
         return jsonify({'message':'No hotel found. :('})
 
+    hotel = Hotel.query.filter_by(cnpj=promo.hotel_cnpj).first()
+
     promo_data = {}
     promo_data['id'] = promo.id
     promo_data['site'] = promo.site_end
     promo_data['cnpj'] = promo.hotel_cnpj
+    promo_data['hotel'] = hotel.nome
+    promo_data['cidade'] = hotel.cidade
     promo_data['preco'] = promo.preco
     promo_data['inicio'] = promo.ini_promo
     promo_data['Fim'] = promo.end_promo
@@ -187,12 +194,16 @@ def get_promo_by_hotel(cnpj):
     if not promos:    
         return jsonify({'message':'No hotel found. :('})
 
+    hotel = Hotel.query.filter_by(cnpj=cnpj).first()
+
     output = []
     for promo in promos:
         promo_data = {}
         promo_data['id'] = promo.id
         promo_data['site'] = promo.site_end
         promo_data['cnpj'] = promo.hotel_cnpj
+        promo_data['hotel'] = hotel.nome
+        promo_data['cidade'] = hotel.cidade
         promo_data['preco'] = promo.preco
         promo_data['inicio'] = promo.ini_promo
         promo_data['fim'] = promo.end_promo
@@ -209,10 +220,13 @@ def get_promo_by_site(site):
 
     output = []
     for promo in promos:
+        hotel = Hotel.query.filter_by(cnpj=promo.hotel_cnpj).first()
         promo_data = {}
         promo_data['id'] = promo.id
         promo_data['site'] = promo.site_end
         promo_data['cnpj'] = promo.hotel_cnpj
+        promo_data['hotel'] = hotel.nome
+        promo_data['cidade'] = hotel.cidade
         promo_data['preco'] = promo.preco
         promo_data['inicio'] = promo.ini_promo
         promo_data['fim'] = promo.end_promo

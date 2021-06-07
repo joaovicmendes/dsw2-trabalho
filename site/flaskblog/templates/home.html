@@ -1,8 +1,14 @@
 {% extends "layout.html" %}
 
 {% block content %}
+    <label for="queryCity" >Cidade:</label>
+    <input id="queryCity" name="queryCity" />
+    <button type="button" onClick="searchPromocao()">Procurar</button>
+    <br>
+    <br>
     {# Verifica se as variaveis necessárias para criar uma tabela existem e se existir inclui o template de tabela#}
     {% if table_data is defined %}
         {% include 'table.html'  %}
     {% endif %}
+    <script>home()</script>
 {% endblock content %}
