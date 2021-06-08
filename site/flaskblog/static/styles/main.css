@@ -75,6 +75,13 @@ input[type=submit]:hover, button:hover {
     display: table;
     clear: both;
 }
+/*
+    Quando adicionei o bootstrap, sem mexer em nada os botoẽs de selecionar o tipo de cadastro ficavam
+    gigantes, esse codigo abaixo arruma isso.
+*/
+.row>a{
+    width: max-content;
+}
 
 
 .side_menu{
@@ -83,13 +90,19 @@ input[type=submit]:hover, button:hover {
     border-color: #AAAAAA;
     height: 100%;
     width: 200px;
-    position: fixed;
+    
     z-index: 1;
     top: 0;
     left: 0;
     background-color: #f1f1f1;
     overflow-x: hidden;
     padding-top: 20px;
+}
+/*Faz o media query e se for menor q 1010px a largura da tela, esconde o side menu*/
+@media screen and (max-width: 1010px) {
+    .side_menu{
+        display: none;
+    }
 }
 .side_menu a {
     padding: 6px 8px 6px 16px;
@@ -137,19 +150,65 @@ input[type=submit]:hover, button:hover {
     
 }
 .top_menu ul{
-    position: fixed;
+    /*position: fixed;
     top: 0;
+    já q mudei para grid o main body, isso acaba quebrando o layout
+    */
     width: 100%;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding-right: 10px;
     overflow: hidden;
     background-color: #333;
 }
 
+/*adicionei isso pra poder controlar o tamanho da top bar e remover a necessidade de posição fixa, tbm se
+adicionar outras coisas nela ela já se adapta bem
+*/
+.top_menu{
+    display: flex;
+    flex-flow: row-reverse;
+    
+}
+
+/*
+    Por mudar pra um formato de grid fica desnecessário essas margens.
+    Foi por causa delas que mudei pra grid, na hora de deixar responsivo isso bugava muito o tamanho
+    das coisas e grid deixa tudo fechadinho, ai ficou mais fácil.
+*/
 .main {
-    margin-left: 220px; /* Same as the width of the sidenav */
-    margin-top: 75px; /* Same as the width of the sidenav */
+    /*margin-left: 220px; /* Same as the width of the sidenav */
+    /*margin-top: 75px; /* Same as the width of the sidenav */
     padding: 0px 10px;
     text-decoration: none;
+}
+
+/*
+    Pra fazer tudo uma grid primeiro criei o novo div de classe "main_body" q é basicamente um wrapper
+    que vai ter 2 elementos, a side bar e um wrapper pro resto. Fazendo isso quando o side_menu sumir
+    pra manter a responsividade, diminui a quantidade de coisa que tem que mudar de tamanho
+*/
+.main_body{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: max-content;
+    width: 100vw;
+    height: 100vh;
+}
+/*
+    Esse wrapper é pra ter 2 elementos, a top_bar e o main, eu só coloquei o flex-flow de coluna pra
+    manter o layout como tava antes.
+*/
+.wrapper{
+    display: flex;
+    flex-flow: column;
+}
+/*
+    Essa query serve pra quando o side_menu sumir o body ocupar 100% da largura da tela, antes ele ficava
+    com uma parte vazia pq o tamanho não ajustava.
+*/
+@media screen and (max-width: 1010px) {
+    .wrapper{
+        width: 100vw;
+    }
 }

@@ -14,36 +14,45 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- fim scripts jQuery-->
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/bootstrap/bootstrap.min.css') }}">
     <link rel="shortcut icon" href="/static/Otelo.svg">
 </head>
 <body>
-    <div class="top_menu">
-        <ul>
-            {% if data.logado %}
-            <li><a href="/logout">Logout</a></li>
-            <li>{{data.username}}</li>
-            {% else %}
-            <li><a href="/login">Login</a></li>
-            <li><a href="/cadastrar">Cadastrar</a></li>
-            {% endif %}
-        </ul>
+    <div class="main_body">
+        <div class="side_menu">
+            <img src="/static/Otelo.png" style="padding-left:20px;" width="150"> </li>
+            <ul>
+                <br> 
+                <li><a onclick="home()">Início</a></li>
+                <li><a onclick="sites()">Sites</a></li>
+                <li><a onclick="hoteis()">Hotéis</a></li>
+                {% if data.logado %}
+                <li><a href="/cadastrar/promocao">Criar Promoção</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="wrapper">
+            <div class="top_menu">
+                <ul>
+                    {% if data.logado %}
+                    <li><a href="/logout">Logout</a></li>
+                    <li>{{data.username}}</li>
+                    {% else %}
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/cadastrar">Cadastrar</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            
+            <div class="main" id="main">
+        {% block content %}
+        {% endblock %}
+            </div>
+        </div>
+
     </div>
-    <div class="side_menu">
-        <img src="/static/Otelo.png" style="padding-left:20px;" width="150"> </li>
-        <ul>
-            <br> 
-            <li><a onclick="home()">Início</a></li>
-            <li><a onclick="sites()">Sites</a></li>
-            <li><a onclick="hoteis()">Hotéis</a></li>
-            {% if data.logado %}
-            <li><a href="/cadastrar/promocao">Criar Promoção</a></li>
-            {% endif %}
-        </ul>
-    </div>
-    <div class="main" id="main">
-{% block content %}
-{% endblock %}
-    </div>
+    
+    
 </body>
 </html>
 
