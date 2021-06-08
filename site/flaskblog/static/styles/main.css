@@ -212,3 +212,17 @@ adicionar outras coisas nela ela já se adapta bem
         width: 100vw;
     }
 }
+
+/*
+    Faz a tabela ficar com scroll interno nela
+*/
+.table_wrapper{
+    overflow: scroll;
+    margin: 20px;
+}
+
+@media screen and (max-width: 1010px) {
+    .table_wrapper{
+        margin: 10px;
+    }
+}

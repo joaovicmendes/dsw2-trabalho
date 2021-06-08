@@ -1,19 +1,22 @@
 {% block content %}
 <div>
     <h2 id="table-title" style="align-content: center;">{{ name }}</h2>
-    <table id="table-content">
-        <tr>
-            {% for header in headers %}
-            <th>{{ header }}</th>
+    <div class="table_wrapper">
+        <table id="table-content">
+            <tr>
+                {% for header in headers %}
+                <th>{{ header }}</th>
+                {%endfor%}
+            </tr>
+            {% for row in table_data %}
+            <tr>
+                {%for cell in row%}
+                    <td>{{cell}}</td>
+                {%endfor%}
+            </tr>
             {%endfor%}
-        </tr>
-        {% for row in table_data %}
-        <tr>
-            {%for cell in row%}
-                <td>{{cell}}</td>
-            {%endfor%}
-        </tr>
-        {%endfor%}
-    </table>
+        </table>
+    </div>
+    
 </div>
 {% endblock content %}
