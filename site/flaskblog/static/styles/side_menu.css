@@ -47,11 +47,9 @@
         transition: 0.25s;
       }
       .openbtn{
-        display: inline;
+        display: flex;
       }
       .closebtn {
         display: none;
       }
-
-
 }
