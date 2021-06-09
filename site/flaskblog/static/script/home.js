@@ -266,10 +266,10 @@ function deletePromocao(id) {
             if (response.status != 200) {
                 response.json().then(
                     (data) => { 
-                        alert(data.message); 
+                        alert(data.message);
                     });
-                return;
             }
+            alert("Promoção deletada com sucesso!");
+            home();
         });
-    home(); 
 }
