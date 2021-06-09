@@ -36,6 +36,9 @@
 
 /*Faz o media query e se for menor q 1010px a largura da tela, esconde o side menu*/
 @media screen and (max-width: 1010px) {
+    img {
+      display:none;
+    }
 
     .side_menu {
         width: 0;
