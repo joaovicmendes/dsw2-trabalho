@@ -166,16 +166,34 @@ def get_token():
     if not auth or not auth.username or not auth.password:
         return make_response(
             'Credenciais inválidas',
-            401,
+            403,
             {'WWW-Authenticate' : 'Basic realm="Precisa estar logado"'})
 
     user = get_user_via_username(auth.username)
     if not user:
-        return jsonify({'message':'Credenciais invalidas.'}), 404
+        return jsonify({'message':'Credenciais invalidas.'}), 403
 
     # Geração de token para validar requisições para a API
     if check_password_hash(user.senha, auth.password): 
         token = generate_token(user)
         return jsonify({'token': token, 'role': get_user_role(user), 'username': auth.username}), 200
 
-    return jsonify({'message':'Credenciais invalidas.'}), 404
+    return jsonify({'message':'Credenciais invalidas.'}), 403
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    context = get_session_context(session)
+    return render_template('404.html', data=context), 404
+
+@app.errorhandler(405)
+def method_not_allowed(e):
+    # note that we set the 404 status explicitly
+    context = get_session_context(session)
+    return render_template('404.html', data=context), 405
+
+@app.errorhandler(403)
+def invalid_credentials(e):
+    # note that we set the 404 status explicitly
+    context = get_session_context(session)
+    return render_template('403.html', data=context), 404
