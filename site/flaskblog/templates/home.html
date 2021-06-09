@@ -1,27 +1,33 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div id="searchPromocao">
-        <label for="queryCity" >Cidade:</label>
-        <input id="queryCity" name="queryCity" />
-        <label for="startDate" >Data inicial:</label>
-        <input id="startDate" name="startDate" />
-        <label for="endDate" >Data final:</label>
-        <input id="endDate" name="endDate" />
-        <button type="button" onClick="searchPromocao()">Procurar</button>
-        <br>
-        <br>
-    </div>
-    <!-- {# Verifica se as variaveis necessárias para criar uma tabela existem e se existir inclui o template de tabela#}
-    {% if table_data is defined %} -->
-        {% include 'table.html'  %}
-    <!-- {% endif %} -->
-    <script>
-        $( function() {
-            $( "#startDate" ).datepicker();
-            $( "#endDate"   ).datepicker();
-        } )
-        home();
-    </script>
+<div id="searchPromocao" class="promocao_filter">
+    <div class="filter_field">
+    <label for="queryCity">Cidade:</label>
+    <input id="queryCity" name="queryCity" />
+</div>
+<div class="filter_field">
+    <label for="startDate">Data inicial:</label>
+    <input id="startDate" name="startDate" />
+</div>
+<div class="filter_field">
+    <label for="endDate">Data final:</label>
+    <input id="endDate" name="endDate" />
+</div>
+
+    <button type="button" onClick="searchPromocao()">Procurar</button>
     
+</div>
+<!-- {# Verifica se as variaveis necessárias para criar uma tabela existem e se existir inclui o template de tabela#}
+    {% if table_data is defined %} -->
+{% include 'table.html' %}
+<!-- {% endif %} -->
+<script>
+    $(function () {
+        $("#startDate").datepicker();
+        $("#endDate").datepicker();
+    })
+    home();
+</script>
+
 {% endblock content %}

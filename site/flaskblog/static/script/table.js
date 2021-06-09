@@ -7,7 +7,7 @@ function updateTable(category, data) {
     if (category == 'promocao') {
         title.innerText = "Promoções";
         html = promo2table(data);
-        divSearchPromocao.style.display = 'block';
+        divSearchPromocao.style.display = '';
     } else if (category == 'site') {
         title.innerText = "Sites";
         html = site2table(data);

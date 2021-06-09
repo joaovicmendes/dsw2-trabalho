@@ -226,3 +226,19 @@ adicionar outras coisas nela ela já se adapta bem
         margin: 10px;
     }
 }
+
+.promocao_filter{
+    display: flex;
+    max-width: inherit;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1010px) {
+    .promocao_filter{
+        display: inline-grid;
+    }
+}
+
+.filter_field{
+    width: max-content;
+}
