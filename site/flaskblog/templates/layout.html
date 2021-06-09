@@ -8,6 +8,7 @@
     <script type="text/javascript" src="{{url_for('static', filename='script/login.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='script/home.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='script/table.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='script/menu.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='script/cadastro.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='script/getAll.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='script/getSelf.js')}}"></script>
@@ -17,12 +18,14 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- fim scripts jQuery-->
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/side_menu.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/table.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/bootstrap/bootstrap.min.css') }}">
     <link rel="shortcut icon" href="/static/Otelo.svg">
 </head>
 <body>
     <div class="main_body">
-        <div class="side_menu">
+        <div  id="mySidebar" class="side_menu">
             <img src="/static/Otelo.png" style="padding-left:20px;" width="150"> </li>
             <ul>
                 <br> 
@@ -48,8 +51,10 @@
             </div>
             
             <div class="main" id="main">
-        {% block content %}
-        {% endblock %}
+                <button id ="openbtn"  class="openbtn" onclick="openNav()">☰</button>
+                <button id ="closebtn" class="closebtn" onclick="closeNav()">☰</button>
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
 

@@ -1,0 +1,40 @@
+  
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid #ddd;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+tr:hover {background-color: #ddd;}
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #39b499;
+    color: white;
+}
+
+/*
+    Faz a tabela ficar com scroll interno nela
+*/
+.table_wrapper{
+    overflow: scroll;
+    margin: 20px;
+}
+
+@media screen and (max-width: 1010px) {
+    td, th {
+        border: 1px solid #ddd;
+        padding: 6px;
+    }
+    .table_wrapper{
+        margin: 10px;
+    }
+}
