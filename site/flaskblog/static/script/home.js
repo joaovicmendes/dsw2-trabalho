@@ -218,6 +218,16 @@ function onHome(url) {
 
 function searchPromocao() {
     const queryCity = document.getElementById('queryCity').value.toLowerCase();
+    let queryStartDate = new Date(-8640000000000000);
+    let queryEndDate   = new Date(8640000000000000);
+
+    if (document.getElementById('startDate').value) {
+        queryStartDate = new Date(document.getElementById('startDate').value);
+    }
+
+    if (document.getElementById('endDate').value) {
+        queryEndDate = new Date(document.getElementById('endDate').value);
+    }
 
     // @TODO: da pra colocar essa requisição em uma nova função, mas tem que usar async/await
     // Incluindo token de acesso na requisição
@@ -244,11 +254,17 @@ function searchPromocao() {
                     (data) => {
                         let promos = filterPromocao(Object.values(data.promos));
                         let filtered = [];
+
                         for (let promo of promos) {
-                            if (promo.cidade.toLowerCase().includes(queryCity)) {
+                            let promoInicio = new Date(promo.inicio);
+                            let promoFim = new Date(promo.fim);
+
+                            if (promo.cidade.toLowerCase().includes(queryCity) &&
+                                (promoInicio <= queryEndDate && promoFim >= queryStartDate)) {
                                 filtered.push(promo);
                             }
                         }
+
                         updateTable('promocao', filtered);
                     });
             });
