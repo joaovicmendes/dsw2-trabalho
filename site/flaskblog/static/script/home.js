@@ -70,16 +70,20 @@ function updateTable(category, data) {
     let title = document.getElementById('table-title');
     let table = document.getElementById('table-content');
     let html = '';
+    let divSearchPromocao = document.getElementById("searchPromocao");
 
     if (category == 'promocao') {
         title.innerText = "Promoções";
         html = promo2table(data);
+        divSearchPromocao.style.display = 'block';
     } else if (category == 'site') {
         title.innerText = "Sites";
         html = site2table(data);
+        divSearchPromocao.style.display = 'none';
     } else if (category == 'hotel') {
         title.innerText = "Hotéis";
         html = hotel2table(data);
+        divSearchPromocao.style.display = 'none';
     }
 
     table.innerHTML = html;
