@@ -91,7 +91,10 @@ function promo2table(data) {
     let rows   = [];
 
     // Preenchendo cabeçalho
-    const headers = ['Site', 'CNPJ Hotel', 'Nome Hotel', 'Cidade', 'Preço', 'Data início', 'Data fim'];
+    let headers = ['Site', 'CNPJ Hotel', 'Nome Hotel', 'Cidade', 'Preço', 'Data início', 'Data fim'];
+    if(window.localStorage.getItem('token') != null ){
+        headers.push('Options')
+    }
     header += '<tr>';
     for (let item of headers) {
         header += '<th>' + item + '</th>';
@@ -109,6 +112,9 @@ function promo2table(data) {
         row += "<td>" + item.preco  + "</td>";
         row += "<td>" + item.inicio + "</td>";
         row += "<td>" + item.fim    + "</td>";
+        if(window.localStorage.getItem('token') != null ){
+            row += "<td>" + '<button onclick="deletePromocao('+item.id+')">Delete</button>' + "</td>";
+        }
         row += '</tr>';
         rows.push(row);
     }
@@ -246,4 +252,24 @@ function searchPromocao() {
                         updateTable('promocao', filtered);
                     });
             });
+}
+
+function deletePromocao(id) {
+    const token = window.localStorage.getItem('token');
+    let headers = new Headers();
+    headers.append('x-access-token', token);
+    fetch('http://' + window.location.hostname + ':5000/api/promocao/'+ id, { 
+        method: 'DELETE',
+        headers: headers
+    }).then(
+        (response) => {
+            if (response.status != 200) {
+                response.json().then(
+                    (data) => { 
+                        alert(data.message); 
+                    });
+                return;
+            }
+        });
+    home(); 
 }

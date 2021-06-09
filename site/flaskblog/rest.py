@@ -273,8 +273,7 @@ def delete_promo(current_user, id):
     if not promo:    
         return jsonify({'message':'No promo found. :('}), 404
 
-    if (get_user_role(current_user) == 'hotel' and current_user.cnpj != promo.hotel_cnpj) or\
-       (get_user_role(current_user) == 'site' and current_user.endereco != promo.site_end):
+    if (get_user_role(current_user) == 'hotel' and current_user.cnpj != promo.hotel_cnpj) or (get_user_role(current_user) == 'site' and current_user.endereco != promo.site_end):
         return unauthorized_access()
 
     db.session.delete(promo)
