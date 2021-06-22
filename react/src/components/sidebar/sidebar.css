@@ -1,0 +1,58 @@
+.side_menu{
+    border-right-style: solid;
+    border-width: 1px;
+    border-color: #BBB;
+    height: 100%;
+    width: 200px;
+    
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f1f1f1;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+.side_menu a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+}
+
+.side_menu a:hover {
+    background-color: #BBB;
+    color: white;
+}
+.side_menu ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.closebtn, .openbtn {
+    display: none;
+  }
+
+/*Faz o media query e se for menor q 1010px a largura da tela, esconde o side menu*/
+@media screen and (max-width: 1010px) {
+    img {
+      display:none;
+    }
+
+    .side_menu {
+        width: 0;
+        position: fixed;
+        transition: 0.25s;
+        padding-top: 60px;
+      }
+      .side_menu a {
+        transition: 0.25s;
+      }
+      .openbtn{
+        display: flex;
+      }
+      .closebtn {
+        display: none;
+      }
+}
