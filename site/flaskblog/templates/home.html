@@ -3,31 +3,43 @@
 {% block content %}
 <div id="searchPromocao" class="promocao_filter">
     <div class="filter_field">
-    <label for="queryCity">Cidade:</label>
-    <input id="queryCity" name="queryCity" />
-</div>
-<div class="filter_field">
-    <label for="startDate">Data inicial:</label>
-    <input id="startDate" name="startDate" />
-</div>
-<div class="filter_field">
-    <label for="endDate">Data final:</label>
-    <input id="endDate" name="endDate" />
+        <label for="queryCity">Cidade:</label>
+        <input id="queryCity" name="queryCity" />
+    </div>
+    <div class="filter_field">
+        <label for="startDate">Data inicial:</label>
+        <input id="startDate" name="startDate" />
+    </div>
+    <div class="filter_field">
+        <label for="endDate">Data final:</label>
+        <input id="endDate" name="endDate" />
+    </div>
+    <div class="filter_field">
+        <button type="button" class="btn btn-secondary" onClick="searchPromocao()" id="login-submit-button">Procurar</button>
+    </div>
 </div>
 
-    <button type="button" class="btn btn-secondary" onClick="searchPromocao()" id="login-submit-button">Procurar</button>
-    
+<div>
+    <h2 id="table-title" style="align-content: center;"></h2>
+    <div class="table_wrapper">
+        <table id="table-content">
+            
+        </table>
+    </div>
 </div>
-<!-- {# Verifica se as variaveis necessárias para criar uma tabela existem e se existir inclui o template de tabela#}
-    {% if table_data is defined %} -->
-{% include 'table.html' %}
-<!-- {% endif %} -->
+
 <script>
     $(function () {
         $("#startDate").datepicker();
         $("#endDate").datepicker();
     })
-    home();
 </script>
 
+{% if script == 'promocoes' %}
+<script>home();</script>
+{% elif script == 'sites' %}
+<script>sites();</script>
+{% elif script == 'hoteis' %}
+<script>hoteis();</script>
+{% endif %}
 {% endblock content %}

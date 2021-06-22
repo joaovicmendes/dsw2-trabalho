@@ -17,16 +17,23 @@ def get_current_user(current_user):
     user['role'] = role;
     return jsonify(user), 200
 
-@app.route('/api/promocao/<id>', methods=['DELETE'])
-@token_required
-def delete_promo(current_user, id):
-    promo = Promo.query.filter_by(id=id).first()
-    if not promo:    
-        return jsonify({'message':'No promo found. :('}), 404
+@app.route('/api/token', methods=['POST'])
+def get_token():
+    auth = request.authorization
 
-    if (get_user_role(current_user) == 'hotel' and current_user.cnpj != promo.hotel_cnpj) or (get_user_role(current_user) == 'site' and current_user.endereco != promo.site_end):
-        return unauthorized_access()
+    if not auth or not auth.username or not auth.password:
+        return make_response(
+            'Credenciais inválidas',
+            403,
+            {'WWW-Authenticate' : 'Basic realm="Precisa estar logado"'})
 
-    db.session.delete(promo)
-    db.session.commit()
-    return jsonify({'message':"The promo has been deleted"})
+    user = get_user_via_username(auth.username)
+    if not user:
+        return jsonify({'message':'Credenciais invalidas.'}), 403
+
+    # Geração de token para validar requisições para a API
+    if check_password_hash(user.senha, auth.password): 
+        token = generate_token(user)
+        return jsonify({'token': token, 'role': get_user_role(user), 'username': auth.username}), 200
+
+    return jsonify({'message':'Credenciais invalidas.'}), 403

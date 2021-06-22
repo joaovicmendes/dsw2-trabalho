@@ -27,7 +27,7 @@ def home():
     headers, rows = filter_table(data['promos'],'promo', ['id'])
     
     #caso não precise de tabela, só tirar o table_header e table_data que nem renderiza a tabela
-    return render_template('home.html', data=context, headers=headers, table_data=rows, name='Promoções')
+    return render_template('home.html', data=context, headers=headers, table_data=rows, name='Promoções', script="promocoes")
 
 ## Rotas de Cadastro
 # Rota inicial, que redireciona para o arquivo específico desejado
@@ -105,7 +105,7 @@ def list_sites():
     headers, rows = filter_table(data['sites'],'site',['senha','id'])
     
     #caso não precise de tabela, só tirar o table_header e table_data que nem renderiza a tabela
-    return render_template('home.html', title="Otelo - Sites", data=context ,headers=headers, table_data=rows, name='Sites')
+    return render_template('home.html', title="Otelo - Sites", data=context ,headers=headers, table_data=rows, name='Sites', script="sites")
 
 @app.route('/hoteis')
 def list_hotels():
@@ -122,7 +122,7 @@ def list_hotels():
    
     
     #caso não precise de tabela, só tirar o table_header e table_data que nem renderiza a tabela
-    return render_template('home.html', title="Otelo - Hoteis", data=context ,headers=headers, table_data=rows, name='Hoteis')
+    return render_template('home.html', title="Otelo - Hoteis", data=context ,headers=headers, table_data=rows, name='Hoteis', script="hoteis")
 
 
 # Realiza logout por limpar a sessão
@@ -157,28 +157,6 @@ def login():
         
     context = get_session_context(session)
     return render_template('login.html', title="Otelo - Login", data=context)
-
-
-@app.route('/api/token', methods=['POST'])
-def get_token():
-    auth = request.authorization
-
-    if not auth or not auth.username or not auth.password:
-        return make_response(
-            'Credenciais inválidas',
-            403,
-            {'WWW-Authenticate' : 'Basic realm="Precisa estar logado"'})
-
-    user = get_user_via_username(auth.username)
-    if not user:
-        return jsonify({'message':'Credenciais invalidas.'}), 403
-
-    # Geração de token para validar requisições para a API
-    if check_password_hash(user.senha, auth.password): 
-        token = generate_token(user)
-        return jsonify({'token': token, 'role': get_user_role(user), 'username': auth.username}), 200
-
-    return jsonify({'message':'Credenciais invalidas.'}), 403
 
 @app.errorhandler(404)
 def page_not_found(e):
