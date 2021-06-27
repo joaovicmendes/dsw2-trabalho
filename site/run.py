@@ -1,6 +1,8 @@
 from flaskblog import app
+from flask_cors import CORS
 
 if __name__ == '__main__':
+    cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
     app.run(debug=True)
 
 
