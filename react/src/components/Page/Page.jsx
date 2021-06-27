@@ -1,42 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import './fonts.css';
 import Helmet from 'react-helmet'
+import Sidebar from '../Sidebar/Sidebar'
+import Topmenu from '../Topmenu/Topmenu'
+import Main from '../Main/Main'
+import otelo from '../../static/Otelo.svg'
 
-
-import Sidebar from './components/sidebar/sidebar'
-import Topmenu from './components/topmenu/topmenu'
-import Main from './components/main/main'
-
-
-
-export const Page = () => {
-
-    
-
+function Page() {
     return (
-        
         <div>
             <Helmet>
                 <meta charset="UTF-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 <title>Otelo</title>
-                <link rel="icon" href="/static/Otelo.svg"/>
+                <link rel="icon" href={ otelo }/>
             </Helmet>
+
             <div class="main_body">
                 <Sidebar/>
                 <div class='wrapper'>
                     <Topmenu/>
                     <Main/>
                 </div>
-
             </div>
         </div>
     )
 }
 
-ReactDOM.render(
-    <Page />,
-    document.getElementById('root')
-  );
+export default Page

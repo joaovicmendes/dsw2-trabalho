@@ -1,8 +1,7 @@
 import React from 'react'
-import './topmenu.css'
+import './Topmenu.css'
 
-
-const Topmenu = () => {
+function Topmenu() {
     return (
         <div class="top_menu">
                 <ul>
@@ -11,8 +10,7 @@ const Topmenu = () => {
                     {/* <li> Nome do usuário logado</li> */}
                     
                     <li><a href="/login">Login</a></li>
-                    <li><a href="/cadastrar">Cadastrar</a></li>
-                    
+                    <li><a href="/cadastrar">Cadastrar</a></li>  
                 </ul>
             </div>
     )
