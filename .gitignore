@@ -2,3 +2,4 @@
 /venv
 /site/flaskblog/__pycache__
 banco.db
+node_modules/
