@@ -8,14 +8,14 @@ body {
 
 
 input, textarea {
-    background-color : #404040;
-    color: #efefef;
+    background-color : #393744;
+    color: #d9cfe2;
 }
 
 
 .main_body{
-    background-color:#202020;
-    color: #efefef;
+    background-color:#1c1c20;
+    color: #d9cfe2;
     grid-auto-flow: column;
     grid-template-columns: max-content;
     width: 100vw;

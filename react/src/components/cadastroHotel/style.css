@@ -6,9 +6,9 @@
     padding: 10px;
     border-style: solid;
     border-width: 1px;
-    border-color: #48facd;
     border-radius: 10px;
-    background-color: #303030;
+    border-color: #504b57;
+    background-color: #27272c;
 }
 
 .row:after {
@@ -44,7 +44,7 @@ h3{
 }
 
 input[type=submit] {
-    background-color: #04aa8e;
+    background-color: #7a34eb;
     color: white;
     padding: 12px 20px;
     border: none;

@@ -2,11 +2,12 @@
 .top_menu li {
     display: block;
     float: right;
+    border-bottom: 1px solid #22222200;
 }
 
 
 .top_menu li:hover {
-    background-color: #222;
+    border-bottom: 1px solid #7a34eb;
     
 }
 .top_menu li a{
@@ -23,7 +24,7 @@
     margin: 0;
     padding-right: 10px;
     overflow: hidden;
-    background-color: #333;
+    background-color: #17171a;
 }
 
 
@@ -62,8 +63,11 @@
     font-weight: bolder;
 }
 
-
+.top_menu .logo{
+    border-bottom: 1px solid #22222200;
+    
+}
 .top_menu .logo:hover{
-    background-color: rgba(34, 34, 34, 0);
+    border-bottom: 1px solid #22222200;
     
 }
