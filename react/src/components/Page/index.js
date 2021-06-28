@@ -1,7 +1,5 @@
 import Helmet from 'react-helmet'
-import Sidebar from '../Sidebar/Sidebar'
-import Topmenu from '../Topmenu/Topmenu'
-import Main from '../Main/Main'
+import Table from '../table'
 import otelo from '../../static/Otelo.svg'
 
 function Page() {
@@ -15,10 +13,8 @@ function Page() {
             </Helmet>
 
             <div class="main_body">
-                <Sidebar/>
                 <div class='wrapper'>
-                    <Topmenu/>
-                    <Main/>
+                    <Table/>
                 </div>
             </div>
         </div>
