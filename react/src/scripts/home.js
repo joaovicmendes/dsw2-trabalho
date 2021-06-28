@@ -1,6 +1,7 @@
 import{getAll} from './getAll'
 import {updateTable} from './table'
 
+/* eslint-disable */
 export function home() {
     // Atualiza a tabela com promoções
     if (isOnHome(window.location.href)) {
@@ -11,17 +12,18 @@ export function home() {
     window.location.href = "/";
 }
 
-function sites() {
+export function sites() {
     // Atualiza a tabela com sites
     if (isOnHome(window.location)) {
         requestAndUpdate('site');
         return;
     }
+
     // Redireciona para a página principal
     window.location.href = "/sites";
 }
 
-function hoteis() {
+export function hoteis() {
     // Atualiza a tabela com hotéis
     if (isOnHome(window.location)) {
         requestAndUpdate('hotel');
@@ -42,11 +44,11 @@ function isOnHome(url) {
 export async function requestAndUpdate(category) {
     const data = await getAll(category);
 
-    if (category == 'promocao') {
+    if (category === 'promocao') {
         updateTable(category, filterPromocao(Object.values(data.promos)));
-    } else if (category == 'hotel') {
+    } else if (category === 'hotel') {
         updateTable(category, Object.values(data.hoteis));
-    } else if (category == 'site') {
+    } else if (category === 'site') {
         updateTable(category, Object.values(data.sites));
     }
 }
@@ -54,21 +56,21 @@ export async function requestAndUpdate(category) {
 function filterPromocao(promos) {
     const role     = window.localStorage.getItem('role');
     const username = window.localStorage.getItem('username');
-    if (role == null || username == null) {
+    if (role === null || username === null) {
         return promos;
     }
 
     let filtered = []
     for (let promo of promos) {
-        if (role == 'hotel' && promo.cnpj == username)
+        if (role === 'hotel' && promo.cnpj === username)
             filtered.push(promo)
-        else if (role == 'site' && promo.site == username)
+        else if (role === 'site' && promo.site === username)
             filtered.push(promo)
     }
     return filtered;
 }
 
-async function searchPromocao() {
+export async function searchPromocao() {
     const queryCity = document.getElementById('queryCity').value.toLowerCase();
 
     let queryStartDate = new Date(-8640000000000000);
@@ -101,7 +103,7 @@ async function searchPromocao() {
     updateTable('promocao', filtered);
 }
 
-function deletePromocao(id) {
+export function deletePromocao(id) {
     const token = window.localStorage.getItem('token');
     let headers = new Headers();
     headers.append('x-access-token', token);
@@ -110,7 +112,7 @@ function deletePromocao(id) {
         headers: headers
     }).then(
         (response) => {
-            if (response.status != 200) {
+            if (response.status !== 200) {
                 response.json().then(
                     (data) => { 
                         alert(data.message);
@@ -120,3 +122,4 @@ function deletePromocao(id) {
             home();
         });
 }
+/* eslint-enable */

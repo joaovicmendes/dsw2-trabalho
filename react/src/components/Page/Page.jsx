@@ -14,9 +14,9 @@ function Page() {
                 <link rel="icon" href={ otelo }/>
             </Helmet>
 
-            <div class="main_body">
+            <div className="main_body">
                 <Sidebar/>
-                <div class='wrapper'>
+                <div className='wrapper'>
                     <Topmenu/>
                     <Main/>
                 </div>

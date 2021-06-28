@@ -3,7 +3,7 @@ import './Topmenu.css'
 
 function Topmenu() {
     return (
-        <div class="top_menu">
+        <div className="top_menu">
                 <ul>
                     {/* Checar se esta logado */}
                     {/* <li><a href="/logout">Logout</a></li> */}

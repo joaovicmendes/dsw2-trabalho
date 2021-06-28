@@ -1,11 +1,14 @@
 import React from 'react'
+import Table from '../Table/Table'
+import {openNav, closeNav} from '../../scripts/menu'
 import './Main.css'
 
 function Main() {
     return (
-        <div class="main" id="main">
-            <button id ="openbtn"  class="openbtn" onclick="openNav()">☰</button>
-            <button id ="closebtn" class="closebtn" onclick="closeNav()">☰</button>     
+        <div className="main" id="main">
+                <button id ="openbtn"  className="openbtn" onClick={ openNav }>☰</button>
+                <button id ="closebtn" className="closebtn" onClick={ closeNav }>☰</button>
+                <Table/>
         </div>
     )
 }

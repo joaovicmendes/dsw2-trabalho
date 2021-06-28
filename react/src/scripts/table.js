@@ -4,22 +4,22 @@ export function updateTable(category, data) {
     let html = '';
     let divSearchPromocao = document.getElementById("searchPromocao");
 
-    if (category == 'promocao') {
+    if (category === 'promocao') {
         title.innerText = "Promoções";
         html = promo2table(data);
         divSearchPromocao.style.display = '';
-    } else if (category == 'site') {
+    } else if (category === 'site') {
         title.innerText = "Sites";
         html = site2table(data);
         divSearchPromocao.style.display = 'none';
-    } else if (category == 'hotel') {
+    } else if (category === 'hotel') {
         title.innerText = "Hotéis";
         html = hotel2table(data);
         divSearchPromocao.style.display = 'none';
     }
 
     // Se número de Promoções/Sites/Hotéis for zero, avisa que não foram encontrados resultados
-    if (Object.keys(data).length == 0) {
+    if (Object.keys(data).length === 0) {
         title.innerText += " - Nenhum resultado encontrado";
     }
 
@@ -33,7 +33,7 @@ function promo2table(data) {
 
     // Preenchendo cabeçalho
     let headers = ['Site', 'CNPJ Hotel', 'Nome Hotel', 'Cidade', 'Preço', 'Data início', 'Data fim'];
-    if(window.localStorage.getItem('token') != null ){
+    if(window.localStorage.getItem('token') !== null ){
         headers.push('Options')
     }
     header += '<tr>';
@@ -53,8 +53,8 @@ function promo2table(data) {
         row += "<td>" + item.preco  + "</td>";
         row += "<td>" + item.inicio + "</td>";
         row += "<td>" + item.fim    + "</td>";
-        if(window.localStorage.getItem('token') != null ){
-            row += "<td>" + '<button onclick="deletePromocao('+item.id+')">Delete</button>' + "</td>";
+        if(window.localStorage.getItem('token') !== null ){
+            row += '<td><button onclick="deletePromocao(' + item.id + ')">Delete</button></td>';
         }
         row += '</tr>';
         rows.push(row);

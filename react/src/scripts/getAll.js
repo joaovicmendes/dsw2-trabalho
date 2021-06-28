@@ -10,7 +10,7 @@ export async function getAll(category) {
             headers: headers
         })
         
-    if (response.status != 200) {
+    if (response.status !== 200) {
         response.json().then(
             (data) => { 
                 alert(data.message); 

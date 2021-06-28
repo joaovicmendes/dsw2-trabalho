@@ -1,16 +1,17 @@
 import React from 'react'
 import './Sidebar.css'
 import otelo from '../../static/Otelo.png'
+import { home, sites, hoteis } from '../../scripts/home'
 
 function Sidebar() {
     return (
-        <div id="mySidebar" class="side_menu">
-            <img src={otelo} style={{paddingLeft:20+'px'}} width="150"/> 
+        <div id="mySidebar" className="side_menu">
+            <img src={otelo} style={{paddingLeft:20+'px'}} width="150" alt="Otelo"/> 
             <ul>
-                <br/> 
-                <li><a href="javascript:void()" onclick="home()">Início</a></li>
-                <li><a href="javascript:void()" onclick="sites()">Sites</a></li>
-                <li><a href="javascript:void()" onclick="hoteis()">Hotéis</a></li>
+                <br/>
+                <li><button onClick={ home }>Início</button></li>
+                <li><button onClick={ sites }>Sites</button></li>
+                <li><button onClick={ hoteis }>Hotéis</button></li>
                 {/* Verificar se está logado */}
                 <li><a href="/cadastrar/promocao">Criar Promoção</a></li>
             </ul>
