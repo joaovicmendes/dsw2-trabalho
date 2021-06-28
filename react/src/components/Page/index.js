@@ -1,6 +1,6 @@
 import Helmet from 'react-helmet'
 import Table from '../table'
-import otelo from '../../static/Otelo.svg'
+import otelo from '../../static/Otelo.png'
 
 function Page() {
     return (
