@@ -1,5 +1,5 @@
 import React from 'react'
-import './Sidebar.css'
+import './sidebar.css'
 import otelo from '../../static/Otelo.png'
 import { home, sites, hoteis } from '../../scripts/home'
 

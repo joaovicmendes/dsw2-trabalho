@@ -1,6 +1,6 @@
 import React from 'react'
 import {openNav, closeNav} from '../../scripts/menu'
-import './Main.css'
+import './main.css'
 
 function Main() {
     return (

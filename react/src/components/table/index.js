@@ -1,5 +1,5 @@
 import React  from "react";
-import "react-datepicker/dist/react-datepicker.css";
+import './table.css'
 import { searchPromocao, renderTable } from "../../scripts/home";
 
 function Table() {
