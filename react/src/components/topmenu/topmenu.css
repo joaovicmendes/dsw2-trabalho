@@ -3,28 +3,21 @@
     display: block;
     float: right;
 }
+
+
 .top_menu li:hover {
     background-color: #222;
     
 }
 .top_menu li a{
+    cursor: pointer;
     color: white;
     text-decoration: none;
     display: block;
 }
-.top_menu li {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    
-}
+
 .top_menu ul{
-    /*position: fixed;
-    top: 0;
-    já q mudei para grid o main body, isso acaba quebrando o layout
-    */
+
     width: 100%;
     list-style-type: none;
     margin: 0;
@@ -33,11 +26,44 @@
     background-color: #333;
 }
 
-/*adicionei isso pra poder controlar o tamanho da top bar e remover a necessidade de posição fixa, tbm se
-adicionar outras coisas nela ela já se adapta bem
-*/
+
 .top_menu{
     display: flex;
     flex-flow: row-reverse;
+    width: 100%;
+    
+}
+
+.top-left-align {
+    float: left;
+}
+
+.top-button{
+    cursor: pointer;
+    background-color: rgba(34, 34, 34, 0);
+    border: none;
+    color: white;
+    padding: 16px 16px;
+    text-align: center;
+    vertical-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.top_menu img {
+    padding: 0px;
+    border: 0px;
+    height: 45px;
+    width: 45px;
+}
+
+.bold{
+    font-weight: bolder;
+}
+
+
+.top_menu .logo:hover{
+    background-color: rgba(34, 34, 34, 0);
     
 }

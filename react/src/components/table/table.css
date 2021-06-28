@@ -1,0 +1,30 @@
+.filter_field{
+    padding: 5px 20px 20px 20px;
+    display: inline;
+    float: left;
+}
+
+.field{
+    border-style: none;
+    margin-left: 10px;
+    padding: 8px;
+    border-radius: 2px;
+}
+
+
+.promo-button{
+    padding: 8px;
+    border-radius: 2px;
+    display: inline;
+    float: left;
+    background-color: #44b388;
+    border: none;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
+.table-title{
+    margin: 20px;
+}

@@ -12,8 +12,15 @@ body {
     text-decoration: none;
 }
 
+input, textarea {
+    background-color : #404040;
+    color: #efefef;
+}
+
+
 .main_body{
-    display: grid;
+    background-color:#202020;
+    color: #efefef;
     grid-auto-flow: column;
     grid-template-columns: max-content;
     width: 100vw;

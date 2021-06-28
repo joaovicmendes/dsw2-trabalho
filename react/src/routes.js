@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Sidebar from './components/sidebar'
 import Topmenu from './components/topmenu'
 import Main from './components/main'
@@ -17,11 +17,12 @@ import CadastroHotel from './components/cadastroHotel'
 function Routes(){
     return(
         <BrowserRouter>
+
             <div className="main_body">
-            <Sidebar/>
+            {/* <Sidebar/> */}
                 <div className='wrapper'>
                     <Topmenu/>
-                    <Main/>
+                    {/* <Main/> */}
                     <Switch>
                         <Route path='/' exact render={Table}/>
                         <Route path='/login' exact render={Login}/>
