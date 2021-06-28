@@ -1,9 +1,9 @@
 import React  from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import { home, searchPromocao } from "../../scripts/home";
+import { home, searchPromocao, renderTable } from "../../scripts/home";
 
 function Table() {
-    home()
+    renderTable()
     return (
         <div>
             <div id="searchPromocao" className="promocao_filter">

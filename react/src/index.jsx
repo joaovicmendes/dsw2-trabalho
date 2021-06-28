@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Page from './components/Page/Page'
-import './index.css';
+import App from './app';
 
 ReactDOM.render(
-    <Page />,
-    document.getElementById('root')
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById('root'),
   );
+  
