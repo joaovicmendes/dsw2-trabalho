@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import Sidebar from './components/sidebar'
-import Topmenu from './components/topmenu'
-import Main from './components/main'
-import Page from './components/Page'
-import Table from './components/table'
+import Sidebar from './components/Sidebar/Sidebar'
+import Topmenu from './components/Topmenu/Topmenu'
+import Main from './components/Main/Main'
+import Page from './components/Page/Page'
+import Table from './components/Table/Table'
 import Login from './components/login'
 import Cadastro from './components/cadastro'
 import CadastroSite from './components/cadastroSite'

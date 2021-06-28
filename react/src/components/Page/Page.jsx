@@ -1,7 +1,6 @@
 import Helmet from 'react-helmet'
 import Sidebar from '../Sidebar/Sidebar'
 import Topmenu from '../Topmenu/Topmenu'
-import Main from '../Main/Main'
 import otelo from '../../static/Otelo.svg'
 
 function Page() {
@@ -18,7 +17,7 @@ function Page() {
                 <Sidebar/>
                 <div className='wrapper'>
                     <Topmenu/>
-                    <Main/>
+                    <h1>Aoba (não implementado)</h1>
                 </div>
             </div>
         </div>

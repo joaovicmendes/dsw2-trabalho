@@ -1,4 +1,4 @@
-function getToken() {
+export default function getToken() {
     // Montando cabeçalho e extraindo campos username e password do formulário
     const username = document.querySelector('#username').value;
     const password = document.querySelector('#password').value;
