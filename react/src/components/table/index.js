@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { home } from "../../scripts/home";
+import { home, renderTable } from "../../scripts/home";
 
 
 
 function Table(){ 
+    renderTable()
     return (
         <div>
             <div id="searchPromocao" class="promocao_filter">

@@ -1,5 +1,5 @@
 import{getAll} from './getAll'
-import {updateTable} from './table'
+import {updateTable} from './table.js'
 
 export function home() {
     // Atualiza a tabela com promoções
@@ -11,7 +11,7 @@ export function home() {
     window.location.href = "/";
 }
 
-function sites() {
+export function sites() {
     // Atualiza a tabela com sites
     if (isOnHome(window.location)) {
         requestAndUpdate('site');
@@ -21,7 +21,7 @@ function sites() {
     window.location.href = "/sites";
 }
 
-function hoteis() {
+export function hoteis() {
     // Atualiza a tabela com hotéis
     if (isOnHome(window.location)) {
         requestAndUpdate('hotel');
@@ -31,6 +31,23 @@ function hoteis() {
     window.location.href = "/hoteis";
 }
 
+export function renderTable(){
+    if (window.location == "http://localhost:3000/" 
+    || window.location == "http://127.0.0.1:5000/"){
+        requestAndUpdate('promocao');
+        return;
+    }
+    if (window.location == "http://localhost:3000/sites" 
+    || window.location == "http://127.0.0.1:5000/sites"){
+        requestAndUpdate('site');
+        return;
+    }
+    if (window.location == "http://localhost:3000/hoteis" 
+    || window.location == "http://127.0.0.1:5000/hoteis"){
+        requestAndUpdate('hotel');
+        return;
+    }
+}
 function isOnHome(url) {
     return (
         url == "http://localhost:3000/" || url == "http://127.0.0.1:5000/" ||

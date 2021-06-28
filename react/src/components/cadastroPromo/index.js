@@ -1,6 +1,3 @@
-import Helmet from 'react-helmet'
-import otelo from '../../static/Otelo.png'
-
 function CadastroPromo(){
     return(
         <form method="post" class="main">

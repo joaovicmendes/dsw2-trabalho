@@ -1,5 +1,3 @@
-import Helmet from 'react-helmet'
-import otelo from '../../static/Otelo.png'
 function Cadastro(){
     return(
         <div class="main">
