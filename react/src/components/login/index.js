@@ -7,7 +7,7 @@ const Login = () => {
             <form method="post" id="login-form">
                 <h3>Login</h3>
                 <div class="row"> 
-                    <label for="username" class="col-25">Nome de usuário</label>
+                    <label for="username" class="col-25">Usuário</label>
                     <input id= "username" class="col-75 input_text" placeholder="CNPJ ou URL" name="username" required /> <br/>
                 </div>    
 

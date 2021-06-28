@@ -1,0 +1,25 @@
+.center-div{
+    padding-top: 50px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.row-div{
+    align-content: center;
+    padding-top: 25px;
+    padding-left: 40%;
+}
+.center-text{
+    text-align: center;
+}
+
+.register_button{
+    align-content: center;
+    text-decoration: none;
+    color:white;
+    border: solid;
+    background-color: #44b388;
+    border-color: #44b388;
+    padding: 6px 5px;
+    margin-left: 20px;
+    border-radius: 2px;
+}

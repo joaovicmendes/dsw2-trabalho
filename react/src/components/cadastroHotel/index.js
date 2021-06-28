@@ -1,7 +1,9 @@
+import './style.css'
+
 function CadastroHotel(){
     return(
         <form method="post" class="main">
-            <div class="container">
+            <div className="container">
                 <h3>Cadastro de Hotel</h3>
                 <div class="row">
                     <label for="nome" class="col-25">Nome</label>

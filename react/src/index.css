@@ -5,12 +5,7 @@ body {
     margin: 0;
 }
 
-.main {
-    /*margin-left: 220px; /* Same as the width of the sidenav */
-    /*margin-top: 75px; /* Same as the width of the sidenav */
-    
-    text-decoration: none;
-}
+
 
 input, textarea {
     background-color : #404040;
