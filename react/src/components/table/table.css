@@ -1,7 +1,6 @@
 .filter_field{
     padding: 5px 20px 20px 20px;
-    display: inline;
-    float: left;
+    display: inline-flex;
 }
 
 .field{
@@ -17,7 +16,7 @@
     border-radius: 2px;
     display: inline;
     float: left;
-    background-color: #44b388;
+    background-color: #7F00FF;
     border: none;
     color: white;
     text-decoration: none;
@@ -27,4 +26,44 @@
 
 .table-title{
     margin: 20px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid black;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+tr:nth-child(even){background-color: #333;}
+tr:hover {background-color: #666;}
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #7F00FF;
+    color: white;
+}
+
+/*
+    Faz a tabela ficar com scroll interno nela
+*/
+.table_wrapper{
+    overflow: scroll;
+    margin: 20px;
+}
+
+@media screen and (max-width: 1010px) {
+    td, th {
+        border: 1px solid black;
+        padding: 6px;
+    }
+    .table_wrapper{
+        margin: 10px;
+    }
 }

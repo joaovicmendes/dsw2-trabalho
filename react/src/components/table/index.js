@@ -27,10 +27,10 @@ function Table() {
                     </div>
                 </div>
             </div>
-            <div className="table_wrapper">
-                <table id="table-content"> 
-                </table>
-            </div>
+                <div className="table_wrapper">
+                    <table id="table-content"> 
+                    </table>
+                </div>
         </div>
     )
 }

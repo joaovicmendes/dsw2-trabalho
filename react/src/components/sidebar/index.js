@@ -9,9 +9,9 @@ function Sidebar() {
             <img src={otelo} style={{paddingLeft:20+'px'}} width="150" alt="Otelo"/> 
             <ul>
                 <br/>
-                <li><button onClick={ home }>Início</button></li>
-                <li><button onClick={ sites }>Sites</button></li>
-                <li><button onClick={ hoteis }>Hotéis</button></li>
+                <li><a onClick={ home }>Início</a></li>
+                <li><a onClick={ sites }>Sites</a></li>
+                <li><a onClick={ hoteis }>Hotéis</a></li>
                 {/* Verificar se está logado */}
                 <li><a href="/cadastrar/promocao">Criar Promoção</a></li>
             </ul>
